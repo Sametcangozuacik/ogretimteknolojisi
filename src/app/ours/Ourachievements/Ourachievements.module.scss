@@ -1,0 +1,97 @@
+// Variables
+$primary-color: #3583f0;
+$secondary-color: #1D2026;
+$tertiary-color: #f8f9fa;
+$shadow-small: 0 2px 5px rgba(0, 0, 0, 0.1);
+$shadow-large: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+// Section Styling
+.achievementsSection {
+  background-color: $tertiary-color;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: $shadow-large;
+  max-width: 800px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+// Title
+.sectionTitle {
+  color: $primary-color;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid $primary-color;
+  padding-bottom: 0.5rem;
+}
+
+// Year Block
+.yearBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.yearTitle {
+  font-size: 1.5rem;
+  color: $secondary-color;
+  border-left: 4px solid $primary-color;
+  padding-left: 1rem;
+  font-weight: 600;
+}
+
+.description {
+  font-size: 1rem;
+  color: $secondary-color;
+  line-height: 1.4;
+}
+
+// Student List
+.studentList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.studentItem {
+  background-color: $tertiary-color;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  box-shadow: $shadow-small;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: lighten($tertiary-color, 10%);
+    transform: translateY(-2px);
+  }
+}
+
+.studentName {
+  color: $primary-color;
+  font-weight: bold;
+}
+
+// Responsive Design
+@media (max-width: 600px) {
+  .achievementsSection {
+    padding: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .yearTitle {
+    font-size: 1.25rem;
+  }
+
+  .studentItem {
+    font-size: 0.9rem;
+  }
+}

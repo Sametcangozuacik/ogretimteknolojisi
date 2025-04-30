@@ -1,0 +1,276 @@
+/* Ana Konteyner */
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f9f9f9, #e0f7fa);
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeIn 2s ease-out;
+}
+
+/* Başlık Animasyonu */
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #333;
+  animation: slideInTitle 1s ease-out, bounceTitle 1.5s ease-in-out;
+}
+
+/* Zaman ve Skor Konteyneri */
+.timeScoreContainer {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #444;
+  animation: fadeInUp 1.5s ease-out, shake 1s ease-in-out;
+}
+
+/* Zaman ve Skor için Stil */
+.timeLeft,
+.score {
+  background-color: #ffffffaa;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  animation: popIn 1s ease-out, pulse 2s infinite ease-in-out;
+}
+
+/* Input Konteyneri */
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 2s ease-out;
+}
+
+/* Input Etiketi */
+.inputLabel {
+  font-size: 1.1rem;
+  color: #555;
+  animation: fadeIn 1.5s ease-out;
+}
+
+/* Input Alanı */
+.input {
+  padding: 0.75rem 1.2rem;
+  font-size: 1.2rem;
+  border: 2px solid #aaa;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.5s ease-out, glow 1.5s ease-in-out infinite alternate;
+  appearance: none; /* Input oklarını kaldırır */
+}
+
+/* Buton Stil ve Animasyon */
+.submitButton {
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  animation: buttonPulse 1.5s infinite ease-in-out;
+}
+
+.submitButton:hover {
+  background-color: #004d40;
+  animation: buttonHover 0.5s ease-in-out;
+}
+
+/* Soru Konteyneri */
+.questionContainer {
+  margin-bottom: 1rem;
+  animation: fadeInUp 1.5s ease-out, swing 1s ease-in-out;
+}
+
+/* Soru */
+.question {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00796b;
+  background-color: #e0f2f1;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  animation: slideInFromRight 1s ease-out, rotateIn 1s ease-out;
+}
+
+/* Doğru ve Yanlış Cevapları */
+.correct {
+  background-color: #4caf50 !important;
+}
+
+.incorrect {
+  background-color: #f44336 !important;
+}
+
+/* Cevap Feedback */
+.answerFeedback {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  color: #333;
+  animation: fadeIn 1s ease-out;
+}
+
+/* Oyun Bittiğinde Gösterilen Mesaj */
+.gameOver {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  animation: popUp 1.5s ease-out, bounceIn 1.2s ease-in-out;
+}
+
+/* Geri Sayım */
+.countdown {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #ff9800;
+  animation: scaleFade 1s ease-in-out, countdownGlow 1.5s infinite alternate;
+  text-align: center;
+  margin: 2rem 0;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  animation-delay: 1s; /* Starting after the page loads */
+}
+
+/* Animasyonlar */
+@keyframes scaleFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+/* Başlıkta Zıplama Efekti */
+@keyframes bounceTitle {
+  0% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Zaman ve Skor Konteyneri için Sarsılma Efekti */
+@keyframes shake {
+  0% {
+    transform: translateX(-5px);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Input Alanında Parlama Efekti */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+  }
+}
+
+/* Buton Hover Efekti */
+@keyframes buttonHover {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+/* Soru Konteynerine Salınım Efekti */
+@keyframes swing {
+  0% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+/* Soru Döndürme Efekti */
+@keyframes rotateIn {
+  0% {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Game Over Mesajı İçin Zıplama Efekti */
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Geri Sayımda Parlama Efekti */
+@keyframes countdownGlow {
+  0% {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(255, 165, 0, 1);
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "axios": "^1.7.4",
+    "moment": "^2.30.1",
+    "next": "14.2.5",
+    "react": "^18",
+    "react-dom": "^18",
+    "sass": "^1.87.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.3",
+    "@types/react": "19.1.2",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5"
+  }
+}

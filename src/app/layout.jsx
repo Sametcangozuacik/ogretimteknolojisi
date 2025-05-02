@@ -1,6 +1,6 @@
-import { ReactNode } from "react"; // ReactNode tipi için import
-import Head from "next/head";
+import PropTypes from "prop-types"; // PropTypes import edin
 import { Inter } from "next/font/google";
+import Head from "next/head";
 import styles from "./globals.module.scss";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -47,13 +47,8 @@ const mergeMetadata = (customMetadata = {}) => ({
   twitter: { ...defaultMetadata.twitter, ...customMetadata.twitter },
 });
 
-// Layout props tipi tanımla
-interface LayoutProps {
-  children: ReactNode; // children tipi ReactNode olmalı
-  pageMetadata?: Record<string, any>; // Dinamik metadata yapısı
-}
-
-export default function RootLayout({ children, pageMetadata = {} }: LayoutProps) {
+// PropTypes ile props doğrulaması yap
+function RootLayout({ children, pageMetadata = {} }) {
   const metadata = mergeMetadata(pageMetadata);
 
   return (
@@ -95,3 +90,10 @@ export default function RootLayout({ children, pageMetadata = {} }: LayoutProps)
     </html>
   );
 }
+
+RootLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+  pageMetadata: PropTypes.object,
+};
+
+export default RootLayout;

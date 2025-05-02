@@ -2,16 +2,17 @@
 import styles from './mainsection.module.scss';
 import { useState, useEffect } from 'react';
 
-const getRandomQuestion = (level) => {
+const getRandomQuestion = () => {
   const ops = ['+', '-', '×', '÷'];
   const op = ops[Math.floor(Math.random() * ops.length)];
 
-  let maxNum = 20 + (level - 1) * 5;
-  let a = Math.floor(Math.random() * maxNum) + 1;
-  let b = Math.floor(Math.random() * maxNum) + 1;
+  let maxRange = 20;
+
+  let a = Math.floor(Math.random() * maxRange) + 1;
+  let b = Math.floor(Math.random() * maxRange) + 1;
 
   if (op === '÷') {
-    a = a * b; // Bölme işlemi için tam sayı sonucu sağlanır
+    a = a * b; // Bölme işlemini dengeli yapmak için
   }
 
   let result;
@@ -39,48 +40,17 @@ export default function MainSection() {
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [userAnswer, setUserAnswer] = useState('');
-  const [question, setQuestion] = useState(getRandomQuestion(1));
+  const [question, setQuestion] = useState(getRandomQuestion());
   const [userTime, setUserTime] = useState(60);
   const [isRunning, setIsRunning] = useState(false);
   const [answerStatus, setAnswerStatus] = useState(null);
   const [isTimeSet, setIsTimeSet] = useState(false);
-
-  const [countdown, setCountdown] = useState(3); // Yeni: Geri sayım
+  const [countdown, setCountdown] = useState(3);
   const [isCountdownActive, setIsCountdownActive] = useState(false);
 
-  const [level, setLevel] = useState(1); // Seviye
-  const [isLevelSet, setIsLevelSet] = useState(false); // Seviye seçildi mi?
-
-  useEffect(() => {
-    if (!isRunning || timeLeft <= 0) return;
-
-    const timer = setInterval(() => {
-      setTimeLeft((prevTime) => prevTime - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [isRunning, timeLeft]);
-
-  useEffect(() => {
-    if (!isCountdownActive || countdown <= 0) return;
-
-    const countdownInterval = setInterval(() => {
-      setCountdown((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(countdownInterval);
-  }, [isCountdownActive, countdown]);
-
-  useEffect(() => {
-    if (countdown === 0 && isCountdownActive) {
-      setIsCountdownActive(false);
-      setIsRunning(true);
-      setQuestion(getRandomQuestion(level)); // Seviye değişince yeni soru oluştur
-    }
-  }, [countdown, isCountdownActive, level]);
-
   const handleSubmit = () => {
-    if (Number(userAnswer) === question.result) {
+    const answer = Number(userAnswer);
+    if (answer === question.result) {
       setScore((s) => s + 1);
       setAnswerStatus('correct');
     } else {
@@ -88,7 +58,7 @@ export default function MainSection() {
       setAnswerStatus('incorrect');
     }
     setUserAnswer('');
-    setQuestion(getRandomQuestion(level)); // Seviye değişince yeni soru
+    setQuestion(getRandomQuestion()); // Yeni soru oluştur
   };
 
   const handleTimeChange = (e) => {
@@ -97,29 +67,57 @@ export default function MainSection() {
     setTimeLeft(newTime);
   };
 
-  const handleLevelChange = (e) => {
-    setLevel(parseInt(e.target.value, 10));
-  };
-
   const handleStartStop = () => {
-    if (!isTimeSet || !isLevelSet) {
-      return; // Seviye ve süre belirlenmeden oyun başlatılamaz
+    if (!isTimeSet) {
+      setIsTimeSet(true);
     }
-    setCountdown(3); // Geri sayımı başlat
-    setIsCountdownActive(true); // Geri sayımı aktif et
+    setIsRunning(true);
   };
 
   const handleReset = () => {
     setIsRunning(false);
     setIsTimeSet(false);
-    setIsLevelSet(false);
     setTimeLeft(userTime);
     setScore(0);
-    setLevel(1); // Başlangıç seviyesini 1 yap
-    setQuestion(getRandomQuestion(1)); // Seviye 1'den başla
+    setQuestion(getRandomQuestion());
     setUserAnswer('');
     setAnswerStatus(null);
   };
+
+  useEffect(() => {
+    if (isCountdownActive && countdown > 0) {
+      const timer = setTimeout(() => setCountdown((prev) => prev - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+    if (countdown === 0) {
+      setIsCountdownActive(false);
+      setIsRunning(true);
+    }
+  }, [countdown, isCountdownActive]);
+
+  useEffect(() => {
+    let timer;
+    if (isRunning && timeLeft > 0) {
+      timer = setTimeout(() => {
+        setTimeLeft(timeLeft - 1);
+      }, 1000);
+    } else if (timeLeft === 0) {
+      setIsRunning(false);
+    }
+    return () => clearTimeout(timer);
+  }, [isRunning, timeLeft]);
+
+  // Enter tuşuna basıldığında handleSubmit fonksiyonunu çağırma
+  useEffect(() => {
+    const handleEnterPress = (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleSubmit();
+      }
+    };
+    document.addEventListener('keydown', handleEnterPress);
+    return () => document.removeEventListener('keydown', handleEnterPress);
+  }, [userAnswer]);
 
   return (
     <main className={styles.mainContainer}>
@@ -128,25 +126,11 @@ export default function MainSection() {
       <div className={styles.timeScoreContainer}>
         <div className={styles.timeLeft}>Kalan Süre: {timeLeft} saniye</div>
         <div className={styles.score}>Skor: {score}</div>
-        {isLevelSet && <div className={styles.timeLeft}>Seviye: {level}</div>}
       </div>
 
-      {!isTimeSet && !isLevelSet && (
+      {/* Süre belirleme ve başlatma ekranı */}
+      {!isTimeSet && !isCountdownActive && (
         <div className={styles.inputContainer}>
-          <label htmlFor="levelSelect" className={styles.inputLabel}>
-            Seviye Seçin:
-          </label>
-          <select
-            id="levelSelect"
-            value={level}
-            onChange={handleLevelChange}
-            className={styles.input}
-          >
-            <option value="1">Seviye 1</option>
-            <option value="2">Seviye 2</option>
-            <option value="3">Seviye 3</option>
-            <option value="4">Seviye 4</option>
-          </select>
           <label htmlFor="timeInput" className={styles.inputLabel}>
             Süre Belirle:
           </label>
@@ -159,24 +143,21 @@ export default function MainSection() {
             min="1"
             max="300"
           />
-          <button
-            onClick={() => {
-              setIsLevelSet(true);
-              setIsTimeSet(true);
-              handleStartStop(); // Başlat
-            }}
-            className={styles.submitButton}
-          >
+          <button onClick={handleStartStop} className={styles.submitButton}>
             Başlat
           </button>
         </div>
       )}
 
-      {isCountdownActive ? (
+      {/* 3-2-1 Başla animasyonu */}
+      {isCountdownActive && (
         <div className={styles.countdown}>
-          {countdown > 0 ? <h2>{countdown}</h2> : <h2>Başla!</h2>}
+          {countdown > 0 ? countdown : 'Başla!'}
         </div>
-      ) : timeLeft > 0 && isTimeSet && isLevelSet ? (
+      )}
+
+      {/* Oyun başladıktan sonraki ekran */}
+      {isRunning && (
         <>
           <div className={styles.questionContainer}>
             <div className={styles.question}>
@@ -193,7 +174,9 @@ export default function MainSection() {
             />
             <button
               onClick={handleSubmit}
-              className={`${styles.submitButton} ${answerStatus === 'correct' ? styles.correct : ''} ${answerStatus === 'incorrect' ? styles.incorrect : ''}`}
+              className={`${styles.submitButton} ${
+                answerStatus === 'correct' ? styles.correct : ''
+              } ${answerStatus === 'incorrect' ? styles.incorrect : ''}`}
             >
               Cevapla
             </button>
@@ -205,16 +188,17 @@ export default function MainSection() {
             </div>
           )}
         </>
-      ) : (
-        isTimeSet && isLevelSet && (
-          <div className={styles.gameOver}>
-            ⏰ Süre doldu! Toplam Skor: {score}
-            <br />
-            <button onClick={handleReset} className={styles.submitButton}>
-              Yeniden Başlat
-            </button>
-          </div>
-        )
+      )}
+
+      {/* Zaman dolduğunda game over ekranı */}
+      {!isRunning && isTimeSet && (
+        <div className={styles.gameOver}>
+          ⏰ Süre doldu! Toplam Skor: {score}
+          <br />
+          <button onClick={handleReset} className={styles.submitButton}>
+            Yeniden Başlat
+          </button>
+        </div>
       )}
     </main>
   );

@@ -11,7 +11,7 @@
   animation: fadeIn 2s ease-out;
 }
 
-/* Başlık Animasyonu */
+/* Başlık */
 .title {
   font-size: 2.5rem;
   font-weight: bold;
@@ -32,7 +32,7 @@
   animation: fadeInUp 1.5s ease-out, shake 1s ease-in-out;
 }
 
-/* Zaman ve Skor için Stil */
+/* Zaman ve Skor Kutuları */
 .timeLeft,
 .score {
   background-color: #ffffffaa;
@@ -70,10 +70,10 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   animation: slideUp 0.5s ease-out, glow 1.5s ease-in-out infinite alternate;
-  appearance: none; /* Input oklarını kaldırır */
+  appearance: none;
 }
 
-/* Buton Stil ve Animasyon */
+/* Gönder Butonu */
 .submitButton {
   padding: 0.6rem 1.2rem;
   font-size: 1.1rem;
@@ -109,7 +109,7 @@
   animation: slideInFromRight 1s ease-out, rotateIn 1s ease-out;
 }
 
-/* Doğru ve Yanlış Cevapları */
+/* Doğru ve Yanlış Cevaplar */
 .correct {
   background-color: #4caf50 !important;
 }
@@ -118,7 +118,7 @@
   background-color: #f44336 !important;
 }
 
-/* Cevap Feedback */
+/* Cevap Geribildirimi */
 .answerFeedback {
   font-size: 1.3rem;
   font-weight: bold;
@@ -127,7 +127,7 @@
   animation: fadeIn 1s ease-out;
 }
 
-/* Oyun Bittiğinde Gösterilen Mesaj */
+/* Oyun Bitti Mesajı */
 .gameOver {
   font-size: 1.5rem;
   text-align: center;
@@ -145,132 +145,105 @@
   font-size: 5rem;
   font-weight: bold;
   color: #ff9800;
-  animation: scaleFade 1s ease-in-out, countdownGlow 1.5s infinite alternate;
   text-align: center;
   margin: 2rem 0;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   opacity: 0;
-  animation-delay: 1s; /* Starting after the page loads */
+  animation: scaleFade 1s ease-in-out, countdownGlow 1.5s infinite alternate;
+  animation-delay: 1s;
 }
 
-/* Animasyonlar */
-@keyframes scaleFade {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  30% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-  60% {
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 0.8;
-    transform: scale(1);
-  }
+/* === ANİMASYONLAR === */
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
-/* Başlıkta Zıplama Efekti */
-@keyframes bounceTitle {
-  0% {
-    transform: translateY(-5px);
-  }
-  50% {
-    transform: translateY(5px);
-  }
-  100% {
-    transform: translateY(-5px);
-  }
+@keyframes slideInTitle {
+  0% { transform: translateY(-50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
-/* Zaman ve Skor Konteyneri için Sarsılma Efekti */
-@keyframes shake {
-  0% {
-    transform: translateX(-5px);
-  }
-  25% {
-    transform: translateX(5px);
-  }
-  50% {
-    transform: translateX(-5px);
-  }
-  75% {
-    transform: translateX(5px);
-  }
-  100% {
-    transform: translateX(0);
-  }
+@keyframes fadeInUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
-/* Input Alanında Parlama Efekti */
+@keyframes slideUp {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInFromRight {
+  0% { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 @keyframes glow {
-  0% {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-  }
+  0% { box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
+  100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.6); }
 }
 
-/* Buton Hover Efekti */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes buttonPulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 121, 107, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0); }
+}
+
 @keyframes buttonHover {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.05);
-  }
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
 }
 
-/* Soru Konteynerine Salınım Efekti */
 @keyframes swing {
-  0% {
-    transform: rotate(10deg);
-  }
-  50% {
-    transform: rotate(-10deg);
-  }
-  100% {
-    transform: rotate(10deg);
-  }
+  0% { transform: rotate(10deg); }
+  50% { transform: rotate(-10deg); }
+  100% { transform: rotate(10deg); }
 }
 
-/* Soru Döndürme Efekti */
 @keyframes rotateIn {
-  0% {
-    transform: rotate(90deg);
-    opacity: 0;
-  }
-  100% {
-    transform: rotate(0deg);
-    opacity: 1;
-  }
+  0% { transform: rotate(90deg); opacity: 0; }
+  100% { transform: rotate(0); opacity: 1; }
 }
 
-/* Game Over Mesajı İçin Zıplama Efekti */
+@keyframes popUp {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 @keyframes bounceIn {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
 }
 
-/* Geri Sayımda Parlama Efekti */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+@keyframes scaleFade {
+  0% { opacity: 0; transform: scale(0.5); }
+  30% { opacity: 1; transform: scale(1.2); }
+  60% { transform: scale(0.95); }
+  100% { opacity: 0.8; transform: scale(1); }
+}
+
 @keyframes countdownGlow {
-  0% {
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
-  100% {
-    text-shadow: 0 0 20px rgba(255, 165, 0, 1);
-  }
+  0% { text-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
+  100% { text-shadow: 0 0 20px rgba(255, 165, 0, 1); }
 }

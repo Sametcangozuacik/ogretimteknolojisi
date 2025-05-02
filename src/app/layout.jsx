@@ -1,5 +1,6 @@
-import { Inter } from "next/font/google";
+import { ReactNode } from "react"; // ReactNode tipi için import
 import Head from "next/head";
+import { Inter } from "next/font/google";
 import styles from "./globals.module.scss";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -38,7 +39,7 @@ const defaultMetadata = {
   },
 };
 
-// Helper function for metadata merging
+// Yardımcı fonksiyon metadata birleştirme
 const mergeMetadata = (customMetadata = {}) => ({
   ...defaultMetadata,
   ...customMetadata,
@@ -46,31 +47,37 @@ const mergeMetadata = (customMetadata = {}) => ({
   twitter: { ...defaultMetadata.twitter, ...customMetadata.twitter },
 });
 
-export default function RootLayout({ children, pageMetadata = {} }) {
+// Layout props tipi tanımla
+interface LayoutProps {
+  children: ReactNode; // children tipi ReactNode olmalı
+  pageMetadata?: Record<string, any>; // Dinamik metadata yapısı
+}
+
+export default function RootLayout({ children, pageMetadata = {} }: LayoutProps) {
   const metadata = mergeMetadata(pageMetadata);
 
   return (
     <html lang="tr" className={styles.root}>
       <Head>
-        {/* Dynamic Title and Description */}
+        {/* Dinamik Başlık ve Açıklama */}
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
 
-        {/* Keywords */}
+        {/* Anahtar Kelimeler */}
         <meta name="keywords" content={metadata.keywords} />
 
-        {/* SEO Meta Tags */}
+        {/* SEO Meta Etiketleri */}
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={metadata.openGraph.url} />
 
-        {/* Open Graph Meta Tags */}
+        {/* Open Graph Meta Etiketleri */}
         <meta property="og:title" content={metadata.openGraph.title} />
         <meta property="og:description" content={metadata.openGraph.description} />
         <meta property="og:image" content={metadata.openGraph.image} />
         <meta property="og:url" content={metadata.openGraph.url} />
         <meta property="og:type" content={metadata.openGraph.type} />
 
-        {/* Twitter Meta Tags */}
+        {/* Twitter Meta Etiketleri */}
         <meta name="twitter:card" content={metadata.twitter.card} />
         <meta name="twitter:title" content={metadata.twitter.title} />
         <meta name="twitter:description" content={metadata.twitter.description} />
@@ -79,7 +86,7 @@ export default function RootLayout({ children, pageMetadata = {} }) {
         {/* Favicon */}
         <link rel="icon" href="/Titleicon.ico" />
 
-        {/* Structured Data (JSON-LD) */}
+        {/* Yapılandırılmış Veri (JSON-LD) */}
         <script type="application/ld+json">{JSON.stringify(metadata.schema)}</script>
       </Head>
       <body className={inter.className}>

@@ -1,5 +1,5 @@
 'use client';
-import styles from './mainsection.module.scss';
+import styles from './addition.module.scss';
 import { useState, useEffect } from 'react';
 
 // SADECE ÇIKARTMA VE NEGATİF OLMAYACAK

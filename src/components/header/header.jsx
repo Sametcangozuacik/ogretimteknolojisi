@@ -25,6 +25,17 @@ export default function Header() {
               />
             </Link>
           </li>
+          <li className={styles.navItem}>
+            <Link href="/subtraction" className={styles.navLink}>
+              <Image
+                src="/Subtraction.png"
+                alt="Toplama"
+                width={100}
+                height={100}
+                className={styles.navIcon}
+              />
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

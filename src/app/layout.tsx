@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Inter } from "next/font/google";
+import Header from "../components/header/Header";
 import styles from "./globals.module.scss";
 
 // Font import
@@ -16,6 +17,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="tr">
       <body className={`${styles.root} ${inter.className}`}>
+        <Header />
         <main>{children}</main>
       </body>
     </html>

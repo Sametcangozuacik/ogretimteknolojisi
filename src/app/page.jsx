@@ -5,9 +5,7 @@ import MainSection from "../components/mainsection/mainsection";
 export default function Home() {
   return (
     <>
-
       <main className={styles.main}>
-        <MainSection />
       </main>
     </>
   );

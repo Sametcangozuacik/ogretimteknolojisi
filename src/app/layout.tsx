@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Inter } from "next/font/google";
-import Header from "../components/header/Header";
+import Header from "../components/header/header";
 import styles from "./globals.module.scss";
 
 // Font import

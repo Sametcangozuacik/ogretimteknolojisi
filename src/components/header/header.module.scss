@@ -1,45 +1,89 @@
 .header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-  }
-  
-  .nav {
-    margin-top: 1rem;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;  /* Daha fazla iç boşluk */
+}
+
+.nav {
+  margin-top: 2rem;
+}
+
+.navList {
+  display: flex;
+  gap: 3rem; /* Daha geniş boşluk */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap; /* Mobilde item'lar alt satıra geçebilir */
+  justify-content: center;
+}
+
+.navItem {
+  display: flex;
+  flex-direction: column; /* İkon ve metni dikeyde hizalar */
+  align-items: center;    /* Yatayda ortalar */
+  justify-content: center; /* Dikeyde ortalar */
+  transition: transform 0.3s ease; /* Hover efekti ekleyelim */
+}
+
+.navItem:hover {
+  transform: translateY(-10px); /* Hover ile hafif yükselme efekti */
+}
+
+.navLink {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  flex-direction: column;  /* İkon ve metni dikeyde hizalar */
+  align-items: center;     /* Yatayda ortalar */
+  font-weight: 600;
+  font-size: 1.2rem;  /* Metin boyutunu büyüt */
+  transition: color 0.3s ease, transform 0.3s ease; /* Geçiş efektleri */
+}
+
+.navLink:hover {
+  color: #0070f3;
+  transform: scale(1.1); /* Hover'da metin biraz büyüsün */
+}
+
+.navIcon {
+  width: 120px;  /* İkonun boyutunu büyüt */
+  height: 120px; /* İkonun boyutunu büyüt */
+  margin-bottom: 0.8rem;  /* İkon ile metin arasındaki boşluğu artır */
+  transition: transform 0.3s ease; /* İkon hover efekti */
+}
+
+.navIcon:hover {
+  transform: scale(1.1); /* İkon hover ile büyüsün */
+}
+
+.navLink span {
+  font-size: 1rem; /* Metin boyutunu ayarlayalım */
+  text-align: center;
+  transition: opacity 0.3s ease; /* Metin geçiş efekti */
+}
+
+.navLink:hover span {
+  opacity: 0.7; /* Hover ile metnin opaklığını değiştir */
+}
+
+@media (max-width: 768px) {
   .navList {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    gap: 1.5rem;  /* Mobilde ikonlar arasındaki boşluk daha küçük */
   }
-  
-  .navItem {
-    display: flex;
-    flex-direction: column;  // İkon ve metni dikeyde hizalar
-    align-items: center;     // Yatayda ortalar
-    justify-content: center; // Dikeyde ortalar
-  }
-  
-  .navLink {
-    text-decoration: none;
-    color: #333;
-    display: flex;
-    flex-direction: column;  // İkon ve metni dikeyde hizalar
-    align-items: center;     // Yatayda ortalar
-    font-weight: 600;
-  }
-  
+
   .navIcon {
-    width: 100px;  // İkonun boyutu
-    height: 100px; // İkonun boyutu
-    margin-bottom: 0.5rem;  // İkon ile metin arasında boşluk
+    width: 80px;  /* İkon boyutunu mobilde küçült */
+    height: 80px;
   }
-  
-  .navLink:hover {
-    color: #0070f3;
+
+  .navLink {
+    font-size: 1rem;  /* Mobilde font boyutunu küçült */
   }
+
+  .navList {
+    flex-direction: column; /* Mobilde listeyi dikey hale getir */
+  }
+}

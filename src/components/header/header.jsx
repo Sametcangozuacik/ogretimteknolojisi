@@ -17,7 +17,7 @@ export default function Header() {
           <li className={styles.navItem}>
             <Link href="/addition" className={styles.navLink}>
               <Image
-                src="/toplamalogo.png"
+                src="/addition.png"
                 alt="Toplama"
                 width={100}
                 height={100}
@@ -29,6 +29,28 @@ export default function Header() {
             <Link href="/subtraction" className={styles.navLink}>
               <Image
                 src="/Subtraction.png"
+                alt="Toplama"
+                width={100}
+                height={100}
+                className={styles.navIcon}
+              />
+            </Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link href="/multiplication" className={styles.navLink}>
+              <Image
+                src="/multiplication.png"
+                alt="Toplama"
+                width={100}
+                height={100}
+                className={styles.navIcon}
+              />
+            </Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link href="/division" className={styles.navLink}>
+              <Image
+                src="/division.png"
                 alt="Toplama"
                 width={100}
                 height={100}

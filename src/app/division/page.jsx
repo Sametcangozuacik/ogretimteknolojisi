@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 // SADECE BÖLME OLACAK
 const getRandomQuestion = () => {
   const op = '÷';
-  const maxRange = 10;
+  const maxRange = 100;
 
   const b = Math.floor(Math.random() * (maxRange - 1)) + 1; // bölen (1-9)
   const result = Math.floor(Math.random() * maxRange) + 1; // sonuç (1-10)

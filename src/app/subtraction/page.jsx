@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 // SADECE ÇIKARTMA VE NEGATİF OLMAYACAK
 const getRandomQuestion = () => {
   const op = '-'; // Sadece çıkartma
-  const maxRange = 20;
+  const maxRange = 100;
 
   let a = Math.floor(Math.random() * maxRange) + 1;
   let b = Math.floor(Math.random() * maxRange) + 1;

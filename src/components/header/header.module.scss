@@ -1,89 +1,114 @@
+/* Header */
 .header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;  /* Daha fazla iç boşluk */
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  padding: 4rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  max-width: 1200px;
+  margin: 2rem auto;
 }
 
+/* Navigation */
 .nav {
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
+/* Navigation List */
 .navList {
   display: flex;
-  gap: 3rem; /* Daha geniş boşluk */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
   list-style: none;
   padding: 0;
   margin: 0;
-  flex-wrap: wrap; /* Mobilde item'lar alt satıra geçebilir */
-  justify-content: center;
 }
 
+/* Navigation Item */
 .navItem {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  width: 160px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
-  flex-direction: column; /* İkon ve metni dikeyde hizalar */
-  align-items: center;    /* Yatayda ortalar */
-  justify-content: center; /* Dikeyde ortalar */
-  transition: transform 0.3s ease; /* Hover efekti ekleyelim */
+  flex-direction: column;
+  align-items: center;
 }
 
 .navItem:hover {
-  transform: translateY(-10px); /* Hover ile hafif yükselme efekti */
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
+/* Navigation Link */
 .navLink {
   text-decoration: none;
   color: #333;
-  display: flex;
-  flex-direction: column;  /* İkon ve metni dikeyde hizalar */
-  align-items: center;     /* Yatayda ortalar */
   font-weight: 600;
-  font-size: 1.2rem;  /* Metin boyutunu büyüt */
-  transition: color 0.3s ease, transform 0.3s ease; /* Geçiş efektleri */
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s ease;
+  padding: 10px;
 }
 
 .navLink:hover {
   color: #0070f3;
-  transform: scale(1.1); /* Hover'da metin biraz büyüsün */
 }
 
+/* Icon */
 .navIcon {
-  width: 120px;  /* İkonun boyutunu büyüt */
-  height: 120px; /* İkonun boyutunu büyüt */
-  margin-bottom: 0.8rem;  /* İkon ile metin arasındaki boşluğu artır */
-  transition: transform 0.3s ease; /* İkon hover efekti */
+  width: 120px; /* Increased size */
+  height: 120px; /* Increased size */
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background-color: #f0f4f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  padding: 10px;
 }
 
 .navIcon:hover {
-  transform: scale(1.1); /* İkon hover ile büyüsün */
+  transform: scale(1.1);
 }
 
+/* Text Span */
 .navLink span {
-  font-size: 1rem; /* Metin boyutunu ayarlayalım */
+  font-size: 0.95rem;
   text-align: center;
-  transition: opacity 0.3s ease; /* Metin geçiş efekti */
+  color: #555;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
 }
 
 .navLink:hover span {
-  opacity: 0.7; /* Hover ile metnin opaklığını değiştir */
+  opacity: 0.6;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .navList {
-    gap: 1.5rem;  /* Mobilde ikonlar arasındaki boşluk daha küçük */
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .navItem {
+    width: 100%;
+    max-width: 300px;
   }
 
   .navIcon {
-    width: 80px;  /* İkon boyutunu mobilde küçült */
-    height: 80px;
+    width: 90px; /* Adjusted for smaller screens */
+    height: 90px; /* Adjusted for smaller screens */
   }
 
   .navLink {
-    font-size: 1rem;  /* Mobilde font boyutunu küçült */
-  }
-
-  .navList {
-    flex-direction: column; /* Mobilde listeyi dikey hale getir */
+    font-size: 1rem;
   }
 }

@@ -7,7 +7,7 @@ import styles from "./globals.module.scss";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Lokasyon Matematik Oyun",
+  title: "Lokasyon Matematik Game",
   description: "A simple math game",
 };
 

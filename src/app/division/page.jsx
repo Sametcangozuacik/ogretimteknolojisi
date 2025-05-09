@@ -2,12 +2,31 @@
 import styles from './addition.module.scss';
 import { useState, useEffect } from 'react';
 
-// SADECE BÖLME OLACAK
-const getRandomQuestion = () => {
+// Zorluk seviyesine göre soruları değiştiren fonksiyon
+const getRandomQuestion = (difficulty) => {
   const op = '÷';
   const maxRange = 100;
 
-  const b = Math.floor(Math.random() * (maxRange - 1)) + 1; // bölen (1-9)
+  let bMin, bMax;
+  switch (difficulty) {
+    case 'easy':
+      bMin = 1;
+      bMax = 9;
+      break;
+    case 'medium':
+      bMin = 10;
+      bMax = 19;
+      break;
+    case 'hard':
+      bMin = 20;
+      bMax = 50;
+      break;
+    default:
+      bMin = 1;
+      bMax = 9;
+  }
+
+  const b = Math.floor(Math.random() * (bMax - bMin + 1)) + bMin; // bölen
   const result = Math.floor(Math.random() * maxRange) + 1; // sonuç (1-10)
   const a = b * result; // bölünen = bölen x sonuç
 
@@ -18,14 +37,15 @@ export default function MainSection() {
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [userAnswer, setUserAnswer] = useState('');
-  const [question, setQuestion] = useState(getRandomQuestion());
+  const [question, setQuestion] = useState(getRandomQuestion('easy'));
   const [userTime, setUserTime] = useState(60);
   const [isRunning, setIsRunning] = useState(false);
   const [answerStatus, setAnswerStatus] = useState(null);
   const [isTimeSet, setIsTimeSet] = useState(false);
   const [countdown, setCountdown] = useState(3);
   const [isCountdownActive, setIsCountdownActive] = useState(false);
-  const [passRights, setPassRights] = useState(2); // Pas hakkı sayısı
+  const [passRights, setPassRights] = useState(2);
+  const [difficulty, setDifficulty] = useState('easy'); // Zorluk seviyesi
 
   const handleSubmit = () => {
     const answer = Number(userAnswer);
@@ -35,7 +55,7 @@ export default function MainSection() {
       setAnswerStatus('correct');
     } else {
       if (passRights > 0) {
-        setPassRights(passRights - 1); // Pas hakkı kullanıldığında sadece hakkı azalt
+        setPassRights(passRights - 1);
         setAnswerStatus('pass');
       } else {
         setScore((s) => s - 1);
@@ -44,7 +64,7 @@ export default function MainSection() {
     }
 
     setUserAnswer('');
-    setQuestion(getRandomQuestion());
+    setQuestion(getRandomQuestion(difficulty)); // Zorluk seviyesine göre soru
   };
 
   const handleTimeChange = (e) => {
@@ -56,6 +76,7 @@ export default function MainSection() {
   const handleStartStop = () => {
     if (!isTimeSet) {
       setIsTimeSet(true);
+      setTimeLeft(userTime); // Süreyi başlatmadan önce sıfırla
     }
     setIsCountdownActive(true);
   };
@@ -65,8 +86,8 @@ export default function MainSection() {
     setIsTimeSet(false);
     setTimeLeft(userTime);
     setScore(0);
-    setPassRights(2); // Pas hakkını sıfırla
-    setQuestion(getRandomQuestion());
+    setPassRights(2);
+    setQuestion(getRandomQuestion(difficulty)); // Zorluk seviyesine göre reset
     setUserAnswer('');
     setAnswerStatus(null);
     setCountdown(3);
@@ -106,24 +127,45 @@ export default function MainSection() {
         <div className={styles.passRights}>Pas Hakkı: {passRights}</div>
       </div>
 
+      {/* Süre belirleme ve zorluk seçimi */}
       {!isTimeSet && !isCountdownActive && (
-        <div className={styles.inputContainer}>
-          <label htmlFor="timeInput" className={styles.inputLabel}>
-            Süre Belirle:
-          </label>
-          <input
-            id="timeInput"
-            type="number"
-            value={userTime}
-            onChange={handleTimeChange}
-            className={styles.input}
-            min="1"
-            max="300"
-          />
+        <>
+          <div className={styles.inputContainer}>
+            <label htmlFor="timeInput" className={styles.inputLabel}>
+              Süre Belirle:
+            </label>
+            <input
+              id="timeInput"
+              type="number"
+              value={userTime}
+              onChange={handleTimeChange}
+              className={styles.input}
+              min="1"
+              max="300"
+            />
+          </div>
+          
+          {/* Zorluk Seviyesi Seçimi */}
+          <div className={styles.inputContainer}>
+            <label htmlFor="difficulty" className={styles.inputLabel}>
+              Zorluk Seviyesi:
+            </label>
+            <select
+              id="difficulty"
+              value={difficulty}
+              onChange={(e) => setDifficulty(e.target.value)}
+              className={styles.input}
+            >
+              <option value="easy">Kolay</option>
+              <option value="medium">Orta</option>
+              <option value="hard">Zor</option>
+            </select>
+          </div>
+
           <button onClick={handleStartStop} className={styles.submitButton}>
             Başlat
           </button>
-        </div>
+        </>
       )}
 
       {isCountdownActive && (

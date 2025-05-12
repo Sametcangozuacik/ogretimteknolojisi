@@ -6,7 +6,7 @@ import styles from './addition.module.scss';
 const getRandomQuestion = () => {
   const op = '×';
 
-  let maxRange = 100;  // 1 ile 100 arasındaki sayılar
+  let maxRange = 50;  // 1 ile 100 arasındaki sayılar
 
   let a = Math.floor(Math.random() * maxRange) + 1;
   let b = Math.floor(Math.random() * maxRange) + 1;

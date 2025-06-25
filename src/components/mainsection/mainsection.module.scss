@@ -5,20 +5,23 @@
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f3e8dc, #fdfaf5);
   padding: 2rem;
   font-family: 'Segoe UI', sans-serif;
   animation: fadeIn 2s ease-out;
+  background: linear-gradient(135deg, #f3e5d0, #f1dfcc);
+  
 }
 
 /* === BAŞLIK === */
 .title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
   text-align: center;
-  color: #3e2f22;
+  color: #5c4630;
   animation: slideInTitle 1s ease-out, bounceTitle 1.5s ease-in-out;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
+  letter-spacing: 1px;
 }
 
 /* === ZAMAN ve SKOR === */
@@ -50,11 +53,11 @@
 .question {
   font-size: 2rem;
   font-weight: bold;
-  color: #795548;
-  background-color: #efebe9;
+  color: #6b4c3b;
+  background-color: #f9f1e9;
   padding: 1rem 2rem;
   border-radius: 16px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   animation: slideInFromRight 1s ease-out, rotateIn 1s ease-out;
 }
 
@@ -171,12 +174,29 @@
   color: #3e2f22;
 }
 
-.navItem:nth-child(1) { background: #dec8ae; }
-.navItem:nth-child(2) { background: #e3d1b7; }
-.navItem:nth-child(3) { background: #d6bfa5; }
-.navItem:nth-child(4) { background: #e7cdb9; }
-.navItem:nth-child(5) { background: #d9c1a3; }
-.navItem:nth-child(6) { background: #e2c5ab; }
+.navItem:nth-child(1) {
+  background: #f3e5d0;
+}
+
+.navItem:nth-child(2) {
+  background: #f1dfcc;
+}
+
+.navItem:nth-child(3) {
+  background: #f8e6d9;
+}
+
+.navItem:nth-child(4) {
+  background: #f2e0ca;
+}
+
+.navItem:nth-child(5) {
+  background: #f0dbc4;
+}
+
+.navItem:nth-child(6) {
+  background: #edd7c0;
+}
 
 .navItem:hover {
   transform: translateY(-8px);
@@ -255,20 +275,225 @@
 }
 
 /* === ANİMASYONLAR === */
-@keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes slideInTitle { 0% { transform: translateY(-50px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-@keyframes fadeInUp { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-@keyframes slideUp { 0% { transform: translateY(30px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-@keyframes slideInFromRight { 0% { transform: translateX(100%); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
-@keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-@keyframes glow { 0% { box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); } 100% { box-shadow: 0 0 20px rgba(255, 213, 153, 0.6); } }
-@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-@keyframes buttonPulse { 0% { box-shadow: 0 0 0 0 rgba(141, 110, 83, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(141, 110, 83, 0); } 100% { box-shadow: 0 0 0 0 rgba(141, 110, 83, 0); } }
-@keyframes buttonHover { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
-@keyframes swing { 0% { transform: rotate(10deg); } 50% { transform: rotate(-10deg); } 100% { transform: rotate(10deg); } }
-@keyframes rotateIn { 0% { transform: rotate(90deg); opacity: 0; } 100% { transform: rotate(0); opacity: 1; } }
-@keyframes popUp { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-@keyframes bounceIn { 0% { transform: scale(0.8); opacity: 0; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); } }
-@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } }
-@keyframes scaleFade { 0% { opacity: 0; transform: scale(0.5); } 30% { opacity: 1; transform: scale(1.2); } 60% { transform: scale(0.95); } 100% { opacity: 0.8; transform: scale(1); } }
-@keyframes countdownGlow { 0% { text-shadow: 0 0 5px rgba(0, 0, 0, 0.2); } 100% { text-shadow: 0 0 20px rgba(255, 165, 0, 1); } }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInTitle {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  100% {
+    box-shadow: 0 0 20px rgba(255, 213, 153, 0.6);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(141, 110, 83, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(141, 110, 83, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(141, 110, 83, 0);
+  }
+}
+
+@keyframes buttonHover {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(10deg);
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes rotateIn {
+  0% {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes popUp {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+@keyframes scaleFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  30% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  60% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+@keyframes countdownGlow {
+  0% {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  100% {
+    text-shadow: 0 0 20px rgba(255, 165, 0, 1);
+  }
+}

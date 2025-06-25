@@ -31,9 +31,10 @@ export default function Addition() {
   const [level, setLevel] = useState('medium');
 
   const handleSubmit = () => {
-    if (userAnswer.trim() === '') return;
+    const trimmed = userAnswer.trim();
+    if (trimmed === '' || isNaN(trimmed)) return;
 
-    const answer = Number(userAnswer);
+    const answer = Number(trimmed);
     if (answer === question.result) {
       setCorrectAnswers((prev) => prev + 1);
       setScore((s) => s + 1);
@@ -95,8 +96,10 @@ export default function Addition() {
     const correctSound = new Audio('/sounds/correct.mp3');
     const incorrectSound = new Audio('/sounds/incorrect.mp3');
 
-    if (status === 'correct') correctSound.play();
-    else incorrectSound.play();
+    const sound = status === 'correct' ? correctSound : incorrectSound;
+    sound.play().catch((err) => {
+      console.warn('Ses oynatılamadı:', err);
+    });
   };
 
   useEffect(() => {
@@ -162,17 +165,17 @@ export default function Addition() {
               max="300"
             />
             <div className={styles.difficultyContainer}>
-            <label>Zorluk Seviyesi:</label>
-            <select onChange={(e) => handleLevelChange(e.target.value)} value={level}>
-              <option value="easy">Kolay</option>
-              <option value="medium">Orta</option>
-              <option value="hard">Zor</option>
-            </select>
-          </div>
+              <label>Zorluk Seviyesi:</label>
+              <select onChange={(e) => handleLevelChange(e.target.value)} value={level}>
+                <option value="easy">Kolay</option>
+                <option value="medium">Orta</option>
+                <option value="hard">Zor</option>
+              </select>
+            </div>
             <button onClick={handleStartStop} className={styles.submitButton}>
               Başlat
             </button>
-          </div>          
+          </div>
         </>
       )}
 
@@ -216,7 +219,7 @@ export default function Addition() {
 
           {answerStatus && (
             <div className={styles.answerFeedback}>
-              {answerStatus === 'correct' ? '✅ Doğru!' : '❌ Yanlış!' }
+              {answerStatus === 'correct' ? '✅ Doğru!' : '❌ Yanlış!'}
             </div>
           )}
 

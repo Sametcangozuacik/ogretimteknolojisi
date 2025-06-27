@@ -1,160 +1,116 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import styles from './addition.module.scss';
+import styles from './addition.module.scss'; // CSS aynı kalabilir, istersen 'multiplication.module.scss' yapabilirsin
 
-// İlk 100 sayı ile çarpma sorusu oluşturma fonksiyonu
-const getRandomQuestion = () => {
-  const op = '×';
+const getRandomQuestion = (level) => {
+  let range = 10;
+  if (level === 'medium') range = 20;
+  else if (level === 'hard') range = 50;
 
-  let maxRange = 50;  // 1 ile 100 arasındaki sayılar
+  const a = Math.floor(Math.random() * range) + 1;
+  const b = Math.floor(Math.random() * range) + 1;
 
-  let a = Math.floor(Math.random() * maxRange) + 1;
-  let b = Math.floor(Math.random() * maxRange) + 1;
-
-  let result = a * b; // Sadece çarpma işlemi
-
-  return { a, b, op, result };
+  return { a, b, result: a * b };
 };
 
 export default function Multiplication() {
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [userAnswer, setUserAnswer] = useState('');
-  const [question, setQuestion] = useState(getRandomQuestion());
+  const [question, setQuestion] = useState(getRandomQuestion('medium'));
   const [userTime, setUserTime] = useState(60);
   const [isRunning, setIsRunning] = useState(false);
-  const [answerStatus, setAnswerStatus] = useState(null);
-  const [isTimeSet, setIsTimeSet] = useState(false);
-  const [countdown, setCountdown] = useState(3);
-  const [isCountdownActive, setIsCountdownActive] = useState(false);
-  const [passCount, setPassCount] = useState(0); // Pas hakkı sayacı
+  const [feedback, setFeedback] = useState(null);
+  const [passCount, setPassCount] = useState(0);
+  const [correct, setCorrect] = useState(0);
+  const [incorrect, setIncorrect] = useState(0);
+  const [level, setLevel] = useState('medium');
 
-  const handleSubmit = () => {
-    const answer = Number(userAnswer);
-    if (answer === question.result) {
-      setScore((s) => s + 1);
-      setAnswerStatus('correct');
-    } else {
-      setScore((s) => s - 1);
-      setAnswerStatus('incorrect');
-    }
-    setUserAnswer('');
-    setQuestion(getRandomQuestion()); // Yeni soru oluştur
-  };
-
-  const handleTimeChange = (e) => {
-    const newTime = parseInt(e.target.value, 10);
-    setUserTime(newTime);
-    setTimeLeft(newTime);
-  };
-
-  const handleStartStop = () => {
-    if (!isTimeSet) {
-      setIsTimeSet(true);
-    }
+  const handleStart = () => {
+    setScore(0);
+    setPassCount(0);
+    setCorrect(0);
+    setIncorrect(0);
+    setTimeLeft(userTime);
+    setQuestion(getRandomQuestion(level));
     setIsRunning(true);
   };
 
-  const handleReset = () => {
-    setIsRunning(false);
-    setIsTimeSet(false);
-    setTimeLeft(userTime);
-    setScore(0);
-    setPassCount(0);  // Pas hakkını sıfırla
-    setQuestion(getRandomQuestion());
+  const handleSubmit = () => {
+    const answer = Number(userAnswer.trim());
+    if (isNaN(answer)) return;
+
+    const isCorrect = answer === question.result;
+    setFeedback(isCorrect ? '✅ Doğru!' : '❌ Yanlış!');
+    setScore((s) => s + (isCorrect ? 1 : -1));
+    isCorrect ? setCorrect((c) => c + 1) : setIncorrect((i) => i + 1);
+
+    setTimeout(() => {
+      setFeedback(null);
+      setQuestion(getRandomQuestion(level));
+    }, 800);
+
     setUserAnswer('');
-    setAnswerStatus(null);
   };
 
   const handlePass = () => {
     if (passCount < 2) {
-      setPassCount((prev) => prev + 1); // Pas hakkını bir artır
-      setUserAnswer(''); // Yanıtı sıfırla
-      setQuestion(getRandomQuestion()); // Yeni soru oluştur
+      setPassCount((p) => p + 1);
+      setUserAnswer('');
+      setQuestion(getRandomQuestion(level));
     }
   };
 
   useEffect(() => {
-    if (isCountdownActive && countdown > 0) {
-      const timer = setTimeout(() => setCountdown((prev) => prev - 1), 1000);
-      return () => clearTimeout(timer);
-    }
-    if (countdown === 0) {
-      setIsCountdownActive(false);
-      setIsRunning(true);
-    }
-  }, [countdown, isCountdownActive]);
-
-  useEffect(() => {
-    let timer;
-    if (isRunning && timeLeft > 0) {
-      timer = setTimeout(() => {
-        setTimeLeft(timeLeft - 1);
-      }, 1000);
-    } else if (timeLeft === 0) {
-      setIsRunning(false);
-    }
+    if (!isRunning || timeLeft === 0) return;
+    const timer = setTimeout(() => setTimeLeft((t) => t - 1), 1000);
     return () => clearTimeout(timer);
-  }, [isRunning, timeLeft]);
+  }, [timeLeft, isRunning]);
 
-  // Enter tuşuna basıldığında handleSubmit fonksiyonunu çağırma
   useEffect(() => {
-    const handleEnterPress = (e) => {
-      if (e.key === 'Enter') {
+    const onKeyDown = (e) => {
+      if (e.key === 'Enter' && isRunning) {
         e.preventDefault();
         handleSubmit();
       }
     };
-    document.addEventListener('keydown', handleEnterPress);
-    return () => document.removeEventListener('keydown', handleEnterPress);
-  }, [userAnswer]);
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [userAnswer, isRunning]);
 
   return (
     <main className={styles.mainContainer}>
-      <h1 className={styles.title}>🧠 Hızlı Çarpma – Beyin ve Zaman Yarışı</h1>
+      <h1 className={styles.title}>✖️ Hızlı Çarpma – Beyin ve Zaman Yarışı</h1>
 
       <div className={styles.timeScoreContainer}>
-        <div className={styles.timeLeft}>Kalan Süre: {timeLeft} saniye</div>
+        <div className={styles.timeLeft}>Kalan Süre: {timeLeft} sn</div>
         <div className={styles.score}>Skor: {score}</div>
       </div>
 
-      {/* Süre belirleme ve başlatma ekranı */}
-      {!isTimeSet && !isCountdownActive && (
+      {!isRunning ? (
         <div className={styles.inputContainer}>
-          <label htmlFor="timeInput" className={styles.inputLabel}>
-            Süre Belirle:
-          </label>
+          <label>Süre:</label>
           <input
-            id="timeInput"
             type="number"
-            value={userTime}
-            onChange={handleTimeChange}
-            className={styles.input}
-            min="1"
+            min="10"
             max="300"
+            value={userTime}
+            onChange={(e) => setUserTime(+e.target.value)}
+            className={styles.input}
           />
-          <button onClick={handleStartStop} className={styles.submitButton}>
-            Başlat
-          </button>
+          <label>Zorluk:</label>
+          <select value={level} onChange={(e) => setLevel(e.target.value)}>
+            <option value="easy">Kolay</option>
+            <option value="medium">Orta</option>
+            <option value="hard">Zor</option>
+          </select>
+          <button onClick={handleStart} className={styles.submitButton}>Başlat</button>
         </div>
-      )}
-
-      {/* 3-2-1 Başla animasyonu */}
-      {isCountdownActive && (
-        <div className={styles.countdown}>
-          {countdown > 0 ? countdown : 'Başla!'}
-        </div>
-      )}
-
-      {/* Oyun başladıktan sonraki ekran */}
-      {isRunning && (
+      ) : timeLeft > 0 ? (
         <>
-          <div className={styles.questionContainer}>
-            <div className={styles.question}>
-              {question.a} {question.op} {question.b} = ?
-            </div>
+          <div className={styles.question}>
+            {question.a} × {question.b} = ?
           </div>
-
           <div className={styles.inputContainer}>
             <input
               type="number"
@@ -162,47 +118,17 @@ export default function Multiplication() {
               onChange={(e) => setUserAnswer(e.target.value)}
               className={styles.input}
             />
-            <button
-              onClick={handleSubmit}
-              className={`${styles.submitButton} ${
-                answerStatus === 'correct' ? styles.correct : ''
-              } ${answerStatus === 'incorrect' ? styles.incorrect : ''}`}
-            >
-              Cevapla
-            </button>
-            {/* Pas butonu */}
-            <button
-              onClick={handlePass}
-              className={styles.submitButton}
-              disabled={passCount >= 2} // İki kez pas hakkı kullanıldığında buton devre dışı kalır
-            >
-              Pas
-            </button>
+            <button onClick={handleSubmit} className={styles.submitButton}>Cevapla</button>
+            <button onClick={handlePass} className={styles.submitButton} disabled={passCount >= 2}>Pas</button>
           </div>
-
-          {answerStatus && (
-            <div className={styles.answerFeedback}>
-              {answerStatus === 'correct' ? '✅ Doğru!' : '❌ Yanlış!'}
-            </div>
-          )}
-
-          {/* Pas hakkı durumu */}
-          {passCount > 0 && (
-            <div className={styles.passStatus}>
-              Pas Hakkı Kalan: {2 - passCount}
-            </div>
-          )}
+          {feedback && <div className={styles.answerFeedback}>{feedback}</div>}
+          <div className={styles.passStatus}>Pas Hakkı: {2 - passCount}</div>
         </>
-      )}
-
-      {/* Zaman dolduğunda game over ekranı */}
-      {!isRunning && isTimeSet && (
+      ) : (
         <div className={styles.gameOver}>
-          ⏰ Süre doldu! Toplam Skor: {score}
-          <br />
-          <button onClick={handleReset} className={styles.submitButton}>
-            Yeniden Başlat
-          </button>
+          ⏰ Süre Doldu! Skor: {score}
+          <div className={styles.stats}>✅ {correct} | ❌ {incorrect}</div>
+          <button onClick={() => setIsRunning(false)} className={styles.submitButton}>Tekrar Oyna</button>
         </div>
       )}
     </main>

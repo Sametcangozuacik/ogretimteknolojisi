@@ -1,293 +1,286 @@
-/* === ANA KONTEYNER === */
-.mainContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #fcefe3, #f9f3ea);
-  padding: 2.5rem 2rem 3rem;
+:root {
+  --color-primary-dark: #004d40;
+  --color-primary: #008060;
+  --color-primary-light: #00a170;
+  --color-secondary: #2196f3;
+  --color-secondary-dark: #1565c0;
+  --color-bg-start: #fdf6f0;
+  --color-bg-end: #fffefa;
+  --color-text-dark: #2c3e50;
+  --color-text-medium: #4a5a6a;
+  --color-text-light: #eef6f5;
+  --color-border: #c7b7a1;
+  --color-border-focus: #00796b;
+  --shadow-light: rgba(0, 0, 0, 0.08);
+  --shadow-primary: rgba(0, 77, 64, 0.5);
+  --shadow-secondary: rgba(33, 150, 243, 0.6);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  animation: fadeIn 1.8s ease-out forwards;
-  box-sizing: border-box;
-  margin-bottom: 100px;
+  margin: 0;
+  background: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* === BAŞLIK === */
+.container {
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px var(--shadow-light);
+  background: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
+  text-align: center;
+  user-select: none;
+  color: var(--color-text-dark);
+}
+
 .title {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-weight: 900;
-  margin-bottom: 2.5rem;
-  text-align: center;
-  color: #2c3e50;
-  text-shadow: 1px 1px 2px #e9d9c5;
-  animation: slideInTitle 1.2s ease-out forwards, bounceTitle 1.8s ease-in-out infinite;
-  user-select: none;
+  margin-bottom: 1.8rem;
+  text-shadow: 1px 1px 3px #e9d9c5;
 }
 
-/* === ZAMAN & SKOR KONTEYNER === */
-.timeScoreContainer {
+.inputGroup {
+  margin: 1rem 0;
   display: flex;
-  gap: 2.5rem;
-  margin: 1.5rem 0 2rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #34495e;
-  animation: fadeInUp 1.5s ease-out forwards, shake 1.2s ease-in-out;
-  user-select: none;
-}
-
-.timeLeft,
-.score {
-  background-color: rgba(255 255 255 / 0.85);
-  padding: 0.65rem 1.4rem;
-  border-radius: 16px;
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.12),
-    inset 0 0 8px rgba(255, 255, 255, 0.9);
-  animation: popIn 1s ease-out forwards, pulse 2.5s infinite ease-in-out;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.05em;
-}
-
-/* === GİRİŞ ALANI === */
-.inputContainer {
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 2.5rem;
-  background-color: #fff9f3;
-  padding: 1.8rem 2rem;
-  border-radius: 20px;
-  box-shadow:
-    0 6px 14px rgba(0, 0, 0, 0.08),
-    inset 0 0 12px #fff5ec;
-  animation: fadeInUp 1.5s ease-out forwards;
-  width: 100%;
-  max-width: 360px;
-  box-sizing: border-box;
+  gap: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-medium);
+}
+
+.inputGroup label {
+  min-width: 60px;
+  text-align: right;
+  font-size: 1.1rem;
   user-select: none;
 }
 
-.inputContainer label {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #5d6d7e;
-  align-self: flex-start;
-}
-
-.inputContainer input[type="number"],
-.inputContainer select {
-  padding: 0.85rem 1.2rem;
-  font-size: 1.15rem;
-  border: 2px solid #d6ccc2;
-  border-radius: 14px;
-  background-color: #fff;
-  color: #34495e;
+/* Input ve selectlar için gelişmiş stil */
+.inputGroup input[type="number"],
+.inputGroup select,
+.answerInput {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
   width: 100%;
-  box-shadow:
-    0 3px 6px rgba(0, 0, 0, 0.06);
-  transition:
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
+  max-width: 300px;
   text-align: center;
-  cursor: pointer;
   font-weight: 600;
-  font-family: inherit;
+  color: #34495e;
+  background-color: #fff;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+  cursor: text;
 }
 
-.inputContainer input[type="number"]:focus,
-.inputContainer select:focus {
-  border-color: #00796b;
-  box-shadow:
-    0 0 12px #00796baa;
+.inputGroup select {
+  cursor: pointer;
+}
+
+.inputGroup input[type="number"]:hover,
+.inputGroup select:hover,
+.answerInput:hover {
+  border-color: var(--color-primary);
+  box-shadow: inset 0 1px 6px rgba(0, 128, 96, 0.15);
+  background-color: #f9fffc;
+}
+
+.inputGroup input[type="number"]:focus,
+.inputGroup select:focus,
+.answerInput:focus {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 8px var(--color-border-focus);
+  background-color: #f0f9f7;
   outline: none;
 }
 
-/* === BUTON === */
-.submitButton {
-  padding: 0.7rem 1.6rem;
-  font-size: 1.2rem;
-  background: linear-gradient(135deg, #008060, #004d40);
-  color: #eef6f5;
-  border: none;
+/* Placeholder stili */
+.inputGroup input[type="number"]::placeholder,
+.answerInput::placeholder {
+  color: #a0a0a0;
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.inputGroup input[type="number"]:focus::placeholder,
+.answerInput:focus::placeholder {
+  opacity: 0.4;
+}
+
+/* Hata durumları (opsiyonel) */
+.inputGroup input[type="number"].error,
+.answerInput.error {
+  border-color: #e53935;
+  box-shadow: 0 0 8px #e53935aa;
+  background-color: #ffe6e6;
+}
+
+/* Number input spin butonlarını kaldırma */
+.inputGroup input[type=number]::-webkit-inner-spin-button,
+.inputGroup input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputGroup input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 1.4rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
   border-radius: 12px;
   cursor: pointer;
-  font-weight: 700;
-  box-shadow:
-    0 5px 14px #004d4080;
+  border: none;
+  user-select: none;
   transition:
-    background 0.4s ease,
-    transform 0.25s ease,
-    box-shadow 0.3s ease;
-  animation: buttonPulse 2s infinite ease-in-out;
-  user-select: none;
-  margin-top: 0.5rem;
-  width: 100%;
-  max-width: 220px;
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.15s ease;
 }
 
-.submitButton:hover,
-.submitButton:focus {
-  background: linear-gradient(135deg, #00a170, #00664f);
-  box-shadow:
-    0 8px 18px #00664fbb;
-  transform: scale(1.08);
-  outline: none;
+.button.start {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-text-light);
+  box-shadow: 0 5px 14px var(--shadow-primary);
 }
 
-/* === SORU === */
-.questionContainer {
-  margin-bottom: 1.3rem;
-  animation: fadeInUp 1.5s ease-out forwards, swing 1.2s ease-in-out;
+.button.start:hover,
+.button.start:focus-visible {
+  background: linear-gradient(135deg, var(--color-primary-light), #00664f);
+  box-shadow: 0 8px 18px #00664fbb;
+  transform: scale(1.07);
+  outline-offset: 3px;
+}
+
+.button.answer {
+  background-color: var(--color-secondary);
+  color: white;
   width: 100%;
-  max-width: 360px;
-  user-select: none;
+  max-width: 180px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 10px var(--shadow-secondary);
+}
+
+.button.answer:hover,
+.button.answer:focus-visible {
+  background-color: var(--color-secondary-dark);
+  box-shadow: 0 6px 14px rgba(21, 101, 192, 0.8);
+  transform: scale(1.05);
+  outline-offset: 3px;
 }
 
 .question {
-  font-size: 2.3rem;
-  font-weight: 900;
-  color: #00796b;
-  background-color: #d0f0e6;
-  padding: 1.3rem 2.4rem;
-  border-radius: 20px;
-  box-shadow:
-    0 0 12px rgba(0, 121, 107, 0.25);
-  animation: slideInFromRight 1s ease-out forwards, rotateIn 1s ease-out forwards;
-  margin-bottom: 1.7rem;
-  text-align: center;
-  letter-spacing: 0.07em;
-  font-family: 'Segoe UI Black', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* === GERİ BİLDİRİM === */
-.answerFeedback {
-  font-size: 1.45rem;
+  font-size: 1.9rem;
   font-weight: 700;
-  margin-top: 1.2rem;
-  color: #2c3e50;
-  animation: fadeIn 1.3s ease-out forwards;
-  user-select: none;
-  letter-spacing: 0.03em;
-  text-shadow: 0 0 4px #e0f7f3;
+  margin: 1.7rem 0;
+  color: var(--color-border-focus);
+  background-color: #d0f0e6;
+  padding: 1.2rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0, 121, 107, 0.3);
+  user-select: text;
 }
 
-/* === OYUN BİTTİ MESAJI === */
-.gameOver {
-  font-size: 1.85rem;
+.answerInput {
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  width: 80%;
+  max-width: 300px;
+  border: 2px solid #b8b8b8;
+  border-radius: 12px;
   text-align: center;
-  margin-top: 2.5rem;
-  color: #b71c1c;
-  background: linear-gradient(135deg, #ffebee, #ffcdd2);
-  padding: 3rem 2.5rem;
-  border-radius: 22px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
-  animation: popUp 1.5s ease-out forwards, bounceIn 1.2s ease-in-out forwards;
-  transition: transform 0.3s ease;
-  line-height: 1.85;
-  letter-spacing: 0.6px;
+  font-weight: 600;
+  color: #34495e;
+  outline: none;
+  user-select: text;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.answerInput:focus {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 8px var(--color-border-focus);
+}
+
+.feedback {
+  margin-top: 1.3rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #34495e;
+  min-height: 1.8rem;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.statusBar {
+  margin-top: 2.2rem;
+  font-size: 1.15rem;
+  font-weight: 600;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.4rem;
+  justify-content: space-around;
+  color: #455a64;
   user-select: none;
 }
 
-.gameOver:hover {
-  transform: scale(1.05);
+.statusBar div {
+  min-width: 85px;
 }
 
-/* === ANİMASYONLAR === */
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-@keyframes slideInTitle {
-  0% { transform: translateY(-60px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes fadeInUp {
-  0% { transform: translateY(30px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes slideInFromRight {
-  0% { transform: translateX(120%); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes popIn {
-  0% { transform: scale(0.7); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.07); }
-  100% { transform: scale(1); }
-}
-
-@keyframes buttonPulse {
-  0% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0.35); }
-  70% { box-shadow: 0 0 0 10px rgba(0, 121, 107, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0); }
-}
-
-@keyframes swing {
-  0% { transform: rotate(8deg); }
-  50% { transform: rotate(-8deg); }
-  100% { transform: rotate(8deg); }
-}
-
-@keyframes rotateIn {
-  0% { transform: rotate(90deg); opacity: 0; }
-  100% { transform: rotate(0); opacity: 1; }
-}
-
-@keyframes popUp {
-  0% { transform: scale(0.7); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes bounceIn {
-  0% { transform: scale(0.7); opacity: 0; }
-  50% { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  50% { transform: translateX(4px); }
-  75% { transform: translateX(-4px); }
-}
-
-/* Responsive (mobilde de iyi gözüksün) */
+/* Responsive */
 @media (max-width: 480px) {
-  .mainContainer {
-    padding: 1.5rem 1rem 2rem;
+  .container {
+    margin: 1.5rem 1rem;
+    padding: 1.5rem 1.2rem;
   }
+
   .title {
     font-size: 2rem;
   }
-  .timeScoreContainer {
-    font-size: 1.1rem;
-    gap: 1rem;
-    flex-direction: column;
+
+  .inputGroup label {
+    min-width: 50px;
+    font-size: 1rem;
   }
-  .inputContainer {
-    padding: 1.2rem 1rem;
-    max-width: 100%;
+
+  .inputGroup input[type="number"],
+  .inputGroup select {
+    width: 60px;
+    font-size: 0.95rem;
   }
+
   .question {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     padding: 1rem 1.5rem;
   }
-  .submitButton {
+
+  .answerInput {
+    font-size: 1.1rem;
+    width: 100%;
+    max-width: none;
+  }
+
+  .button.answer {
     max-width: 100%;
   }
 }

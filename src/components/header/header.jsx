@@ -27,6 +27,7 @@ export default function Header() {
                 height={100}
                 className={styles.navIcon}
               />
+              <span>Toplama</span>
             </Link>
           </li>
           <li className={styles.navItem}>
@@ -38,6 +39,7 @@ export default function Header() {
                 height={100}
                 className={styles.navIcon}
               />
+              <span>Çıkarma</span>
             </Link>
           </li>
           <li className={styles.navItem}>
@@ -49,6 +51,7 @@ export default function Header() {
                 height={100}
                 className={styles.navIcon}
               />
+              <span>Çarpma</span>
             </Link>
           </li>
           <li className={styles.navItem}>
@@ -56,21 +59,35 @@ export default function Header() {
               <Image
                 src="/division.png"
                 alt="Bölme"
-                width={100}
-                height={100}
+                width={75}
+                height={75}
                 className={styles.navIcon}
               />
+              <span>Bölme</span>
             </Link>
           </li>
           <li className={styles.navItem}>
             <Link href="/alltransactions" className={styles.navLink}>
               <Image
                 src="/alltransactions.png"
-                alt="Bölme"
-                width={100}
-                height={100}
+                alt="Tüm İşlemler"
+                width={75}
+                height={75}
                 className={styles.navIcon}
               />
+              <span>Tüm İşlemler</span>
+            </Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link href="/exponents" className={styles.navLink}>
+              <Image
+                src="/exponents.png"
+                alt="Üslü Sayılar"
+                width={75}
+                height={75}
+                className={styles.navIcon}
+              />
+              <span>Üslü Sayılar</span>
             </Link>
           </li>
         </ul>

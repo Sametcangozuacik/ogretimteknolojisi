@@ -1,4 +1,5 @@
 /* Header */
+/* === HEADER === */
 .header {
   background: linear-gradient(135deg, #ece0d1, #f8f4ef);
   padding: 4rem 2rem;
@@ -6,81 +7,73 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
   text-align: center;
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-/* Logo Container */
+/* === LOGO === */
 .logoContainer {
   width: 100%;
   max-width: 600px;
   margin-bottom: 2rem;
 }
 
-/* Navigation */
+/* === NAVIGATION === */
 .nav {
   margin-top: 3rem;
   width: 100%;
 }
 
-/* Navigation List */
+/* NAVIGATION LIST */
 .navList {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 2rem;
   list-style: none;
   padding: 0;
   margin: 0 auto;
 }
 
-/* Navigation Item – Ortak Stil */
+/* NAVIGATION ITEM */
 .navItem {
   border-radius: 1.25rem;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
   padding: 1.5rem;
   width: 160px;
+  max-width: 90vw;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #fff;
+  text-align: center;
+  margin: 0 auto;
 }
 
-/* Her navItem için daha koyu ve sıcak zemin */
-.navItem:nth-child(1) {
-  background: #a67c52; /* Orta kahverengi */
-}
-.navItem:nth-child(2) {
-  background: #8d6e53; /* Koyu bej */
-}
-.navItem:nth-child(3) {
-  background: #7a5c4a; /* Toprak tonu */
-}
-.navItem:nth-child(4) {
-  background: #b99c7a; /* Açık tarçın */
-}
-.navItem:nth-child(5) {
-  background: #9e735c; /* Sıcak kahverengi */
-}
-.navItem:nth-child(6) {
-  background: #6e4c3b; /* En koyu ton */
-}
+/* ARKA PLAN RENKLERİ */
+.navItem:nth-child(1) { background: #a67c52; }
+.navItem:nth-child(2) { background: #8d6e53; }
+.navItem:nth-child(3) { background: #7a5c4a; }
+.navItem:nth-child(4) { background: #b99c7a; }
+.navItem:nth-child(5) { background: #9e735c; }
+.navItem:nth-child(6) { background: #6e4c3b; }
 
 .navItem:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
 
-/* Navigation Link */
+/* === LINK === */
 .navLink {
   text-decoration: none;
   color: #fff;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,13 +86,13 @@
   color: #ffe7c4;
 }
 
-/* Icon */
+/* === ICON === */
 .navIcon {
   width: 120px;
   height: 120px;
   margin-bottom: 1rem;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1); /* saydam daire */
+  background-color: rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,7 +104,7 @@
   transform: scale(1.1);
 }
 
-/* Text Span */
+/* === TEXT ALTINDA === */
 .navLink span {
   font-size: 0.95rem;
   text-align: center;
@@ -124,27 +117,57 @@
   opacity: 0.7;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* === TABLET (1024px ↓) === */
+@media (max-width: 1024px) {
   .navList {
-    flex-direction: column;
     gap: 1.5rem;
+    justify-content: center;
   }
 
   .navItem {
-    width: 100%;
-    max-width: 300px;
-    padding: 1rem;
+    width: 140px;
+    padding: 1.25rem;
+    margin: 0 auto;
   }
 
   .navIcon {
-    width: 90px;
-    height: 90px;
-    margin-bottom: 0.5rem;
+    width: 100px;
+    height: 100px;
   }
 
   .navLink {
     font-size: 1rem;
+  }
+}
+
+/* === MOBİL (768px ↓) === */
+@media (max-width: 768px) {
+  .navList {
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navItem {
+    width: auto;
+    max-width: 300px;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+
+  .navIcon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.5rem;
+  }
+
+  .navLink {
+    font-size: 0.95rem;
     padding: 5px;
+  }
+
+  .navLink span {
+    font-size: 0.9rem;
   }
 }

@@ -62,6 +62,17 @@ export default function Header() {
               />
             </Link>
           </li>
+          <li className={styles.navItem}>
+            <Link href="/alltransactions" className={styles.navLink}>
+              <Image
+                src="/alltransactions.png"
+                alt="Bölme"
+                width={100}
+                height={100}
+                className={styles.navIcon}
+              />
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

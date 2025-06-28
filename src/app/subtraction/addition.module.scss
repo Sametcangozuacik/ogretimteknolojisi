@@ -160,17 +160,28 @@
 
 // === OYUN BİTTİ ===
 .gameOver {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   text-align: center;
   margin-top: 2rem;
-  color: #d32f2f;
-  background-color: #ffebee;
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  color: #b71c1c;
+  background: linear-gradient(135deg, #ffebee, #ffcdd2);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   animation: popUp 1.5s ease-out, bounceIn 1.2s ease-in-out;
-}
+  transition: transform 0.3s ease;
+  line-height: 1.8; /* Satır aralığı */
+  letter-spacing: 0.5px;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem; /* İçerikler arasında boşluk */
+
+  &:hover {
+    transform: scale(1.03);
+  }
+}
 // === GERİ SAYIM ===
 .countdown {
   font-size: 5rem;

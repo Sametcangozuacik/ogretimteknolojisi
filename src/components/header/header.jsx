@@ -90,6 +90,18 @@ export default function Header() {
               <span>Üslü Sayılar</span>
             </Link>
           </li>
+          <li className={styles.navItem}>
+            <Link href="/equation" className={styles.navLink}>
+              <Image
+                src="/equation.png"
+                alt="Denklemler"
+                width={75}
+                height={75}
+                className={styles.navIcon}
+              />
+              <span>Denklemler</span>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

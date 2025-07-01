@@ -102,6 +102,18 @@ export default function Header() {
               <span>Denklemler</span>
             </Link>
           </li>
+          <li className={styles.navItem}>
+            <Link href="/rationalnumbers" className={styles.navLink}>
+              <Image
+                src="/rationalnumbers.png"
+                alt="Rasyonel Sayılar"
+                width={75}
+                height={75}
+                className={styles.navIcon}
+              />
+              <span>Rasyonel Sayılar</span>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

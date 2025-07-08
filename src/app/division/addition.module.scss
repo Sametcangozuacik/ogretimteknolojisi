@@ -41,7 +41,7 @@
   animation: popIn 1s ease-out, pulse 2s infinite ease-in-out;
 }
 
-// === GİRİŞ ALANI (Süre, Zorluk, Başlat) ===
+// === GİRİŞ ALANI ===
 .inputContainer {
   display: flex;
   flex-direction: column;
@@ -61,7 +61,8 @@
   color: #444;
 }
 
-.inputContainer input[type="number"] {
+.inputContainer input[type="number"],
+.inputContainer select {
   padding: 0.75rem 1rem;
   font-size: 1.1rem;
   border: 2px solid #ccc;
@@ -71,24 +72,7 @@
   text-align: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   transition: border-color 0.3s ease;
-
-  &:focus {
-    border-color: #00796b;
-    outline: none;
-  }
-}
-
-.inputContainer select {
-  padding: 0.7rem 1rem;
-  font-size: 1.05rem;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-  color: #333;
-  width: 200px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  transition: border-color 0.3s ease;
 
   &:focus {
     border-color: #00796b;
@@ -142,20 +126,31 @@
 }
 
 // === CEVAP GERİBİLDİRİMİ ===
+.answerFeedback {
+  margin-top: 1.5rem;
+  margin-bottom: 10px;
+  padding: 1rem 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+  animation: popIn 0.3s ease forwards;
+
+  &.wrong {
+    background: linear-gradient(135deg, #c62828, #ef5350);
+  }
+}
+
 .correct {
   background-color: #4caf50 !important;
 }
 
 .incorrect {
   background-color: #f44336 !important;
-}
-
-.answerFeedback {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-top: 1rem;
-  color: #333;
-  animation: fadeIn 1s ease-out;
 }
 
 // === OYUN BİTTİ ===
@@ -170,13 +165,12 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   animation: popUp 1.5s ease-out, bounceIn 1.2s ease-in-out;
   transition: transform 0.3s ease;
-  line-height: 1.8; /* Satır aralığı */
+  line-height: 1.8;
   letter-spacing: 0.5px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.2rem; /* İçerikler arasında boşluk */
+  gap: 1.2rem;
 
   &:hover {
     transform: scale(1.03);
@@ -212,41 +206,25 @@
   100% { transform: translateY(0); opacity: 1; }
 }
 
-@keyframes slideUp {
-  0% { transform: translateY(30px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
 @keyframes slideInFromRight {
   0% { transform: translateX(100%); opacity: 0; }
   100% { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes popIn {
-  0% { transform: scale(0.8); opacity: 0; }
+  0% { transform: scale(0.9); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 
-@keyframes glow {
-  0% { box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
-  100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.6); }
-}
-
 @keyframes pulse {
-  0% { transform: scale(1); }
+  0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
 }
 
 @keyframes buttonPulse {
   0% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0.4); }
   70% { box-shadow: 0 0 0 10px rgba(0, 121, 107, 0); }
   100% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0); }
-}
-
-@keyframes buttonHover {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.05); }
 }
 
 @keyframes swing {
@@ -286,15 +264,11 @@
 }
 
 @keyframes countdownGlow {
-  0% { text-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
+  0% { text-shadow: 0 0 5px rgba(255, 165, 0, 0.5); }
   100% { text-shadow: 0 0 20px rgba(255, 165, 0, 1); }
 }
 
 @keyframes bounceTitle {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
-}
-@keyframes countdownGlow {
-  0% { text-shadow: 0 0 5px rgba(255, 165, 0, 0.5); }
-  100% { text-shadow: 0 0 20px rgba(255, 165, 0, 1); }
 }

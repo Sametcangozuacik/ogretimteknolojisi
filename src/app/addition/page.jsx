@@ -37,14 +37,21 @@ export default function Addition() {
     if (isNaN(answer)) return;
 
     const isCorrect = answer === question.result;
-    setFeedback(isCorrect ? '✅ Doğru!' : '❌ Yanlış!');
+
+    // ✅ Geliştirilmiş geri bildirim:
+    setFeedback(
+      isCorrect
+        ? '✅ Doğru!'
+        : `❌ Yanlış! Doğru cevap: ${question.result}`
+    );
+
     setScore((s) => s + (isCorrect ? 1 : -1));
     isCorrect ? setCorrect((c) => c + 1) : setIncorrect((i) => i + 1);
 
     setTimeout(() => {
       setFeedback(null);
       setQuestion(getRandomQuestion(level));
-    }, 800);
+    }, 1000);
 
     setUserAnswer('');
   };
@@ -86,31 +93,65 @@ export default function Addition() {
       {!isRunning ? (
         <div className={styles.inputContainer}>
           <label>Süre:</label>
-          <input type="number" min="10" max="300" value={userTime} onChange={(e) => setUserTime(+e.target.value)} className={styles.input} />
+          <input
+            type="number"
+            min="10"
+            max="300"
+            value={userTime}
+            onChange={(e) => setUserTime(+e.target.value)}
+            className={styles.input}
+          />
           <label>Zorluk:</label>
-          <select value={level} onChange={(e) => setLevel(e.target.value)}>
+          <select
+            value={level}
+            onChange={(e) => setLevel(e.target.value)}
+            className={styles.input}
+          >
             <option value="easy">Kolay</option>
             <option value="medium">Orta</option>
             <option value="hard">Zor</option>
           </select>
-          <button onClick={handleStart} className={styles.submitButton}>Başlat</button>
+          <button onClick={handleStart} className={styles.submitButton}>
+            Başlat
+          </button>
         </div>
       ) : timeLeft > 0 ? (
         <>
-          <div className={styles.question}>{question.a} + {question.b} = ?</div>
-          <div className={styles.inputContainer}>
-            <input type="number" value={userAnswer} onChange={(e) => setUserAnswer(e.target.value)} className={styles.input} />
-            <button onClick={handleSubmit} className={styles.submitButton}>Cevapla</button>
-            <button onClick={handlePass} className={styles.submitButton} disabled={passCount >= 2}>Pas</button>
+          <div className={styles.question}>
+            {question.a} + {question.b} = ?
           </div>
-          {feedback && <div className={styles.answerFeedback}>{feedback}</div>}
+          <div className={styles.inputContainer}>
+            <input
+              type="number"
+              value={userAnswer}
+              onChange={(e) => setUserAnswer(e.target.value)}
+              className={styles.input}
+            />
+            <button onClick={handleSubmit} className={styles.submitButton}>
+              Cevapla
+            </button>
+            <button
+              onClick={handlePass}
+              className={styles.submitButton}
+              disabled={passCount >= 2}
+            >
+              Pas
+            </button>
+          </div>
+          {feedback && (
+            <div className={styles.answerFeedback}>{feedback}</div>
+          )}
           <div className={styles.passStatus}>Pas Hakkı: {2 - passCount}</div>
         </>
       ) : (
         <div className={styles.gameOver}>
           ⏰ Süre Doldu! Skor: {score}
-          <div className={styles.stats}>✅ {correct} | ❌ {incorrect}</div>
-          <button onClick={() => setIsRunning(false)} className={styles.submitButton}>Tekrar Oyna</button>
+          <div className={styles.stats}>
+            ✅ {correct} | ❌ {incorrect}
+          </div>
+          <button onClick={() => setIsRunning(false)} className={styles.submitButton}>
+            Tekrar Oyna
+          </button>
         </div>
       )}
     </main>

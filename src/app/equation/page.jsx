@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import styles from './addition.module.scss'; // SCSS dosyan varsa
 
 const getRandomEquation = (level) => {
   let rangeA = 9, rangeX = 20, rangeB = 20;
@@ -25,13 +26,14 @@ export default function OneDegreeEquationGame() {
   const [userTime, setUserTime] = useState(60);
   const [timeLeft, setTimeLeft] = useState(userTime);
   const [score, setScore] = useState(0);
-  const [question, setQuestion] = useState(getRandomEquation(level));
+  const [question, setQuestion] = useState(null);
   const [userAnswer, setUserAnswer] = useState('');
   const [feedback, setFeedback] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
 
+  // Yeni oyun başladığında question da set edilir
   const startGame = () => {
     setScore(0);
     setCorrect(0);
@@ -44,7 +46,7 @@ export default function OneDegreeEquationGame() {
   };
 
   const handleSubmit = () => {
-    if (!isRunning) return;
+    if (!isRunning || !question) return;
     const answer = Number(userAnswer.trim());
     if (isNaN(answer)) return;
 
@@ -75,72 +77,66 @@ export default function OneDegreeEquationGame() {
     return () => clearTimeout(timer);
   }, [timeLeft, isRunning]);
 
-  const bDisplay = question.b >= 0 ? `+ ${question.b}` : `- ${Math.abs(question.b)}`;
+  // Güvenli şekilde bDisplay
+  const bDisplay = question
+    ? question.b >= 0
+      ? `+ ${question.b}`
+      : `- ${Math.abs(question.b)}`
+    : '';
 
   return (
-    <main style={{
-      padding: '2rem',
-      fontFamily: 'Arial, sans-serif',
-      maxWidth: 450,
-      margin: 'auto',
-      textAlign: 'center',
-      border: '2px solid #ccc',
-      borderRadius: '10px',
-      boxShadow: '0 0 10px rgba(0,0,0,0.1)'
-    }}>
-      <h1>1. Dereceden Denklem Çözme Oyunu</h1>
+    <main className={styles.mainContainer}>
+      <h1 className={styles.title}>1. Dereceden Denklem Çözme Oyunu</h1>
 
       {!isRunning ? (
         <>
-          <div style={{ margin: '1rem 0' }}>
-            <label style={{ marginRight: '0.5rem' }}>Süre (sn):</label>
+          <div className={styles.inputContainer}>
+            <label>Süre (sn):</label>
             <input
               type="number"
               min={10}
               max={300}
               value={userTime}
-              onChange={(e) => setUserTime(Math.min(300, Math.max(10, Number(e.target.value))))}
-              style={{ width: 80, padding: '0.2rem 0.4rem', fontSize: '1rem' }}
+              onChange={(e) =>
+                setUserTime(Math.min(300, Math.max(10, Number(e.target.value))))
+              }
+              className={styles.input}
             />
           </div>
 
-          <div style={{ margin: '1rem 0' }}>
-            <label style={{ marginRight: '0.5rem' }}>Zorluk:</label>
-            <select value={level} onChange={(e) => setLevel(e.target.value)} style={{ fontSize: '1rem' }}>
+          <div className={styles.inputContainer}>
+            <label>Zorluk:</label>
+            <select
+              value={level}
+              onChange={(e) => setLevel(e.target.value)}
+              className={styles.input}
+            >
               <option value="easy">Kolay</option>
               <option value="medium">Orta</option>
               <option value="hard">Zor</option>
             </select>
           </div>
 
-          <button
-            onClick={startGame}
-            style={{
-              padding: '0.5rem 1rem',
-              fontSize: '1.2rem',
-              backgroundColor: '#4caf50',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              marginTop: '1rem'
-            }}
-          >
+          <button onClick={startGame} className={styles.submitButton}>
             Başlat
           </button>
         </>
       ) : (
         <>
-          <div style={{ fontSize: '1.7rem', margin: '1.5rem 0' }}>
-            {question.a}x {bDisplay} = {question.c}
-          </div>
+          {question ? (
+            <div className={styles.question}>
+              {question.a}x {bDisplay} = {question.c}
+            </div>
+          ) : (
+            <div>Yükleniyor...</div>
+          )}
 
           <input
             type="number"
             value={userAnswer}
             onChange={(e) => setUserAnswer(e.target.value)}
             placeholder="x'in değerini gir"
-            style={{ fontSize: '1.3rem', padding: '0.5rem', width: '80%' }}
+            className={styles.input}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault();
@@ -148,29 +144,16 @@ export default function OneDegreeEquationGame() {
               }
             }}
           />
-          <br />
-          <button
-            onClick={handleSubmit}
-            style={{
-              marginTop: '1rem',
-              padding: '0.6rem 1.2rem',
-              fontSize: '1.2rem',
-              cursor: 'pointer',
-              borderRadius: '5px',
-              border: 'none',
-              backgroundColor: '#2196f3',
-              color: 'white'
-            }}
-          >
+          <button onClick={handleSubmit} className={styles.submitButton}>
             Cevapla
           </button>
 
-          <div style={{ marginTop: '1rem', fontSize: '1.3rem' }}>{feedback}</div>
+          {feedback && <div className={styles.answerFeedback}>{feedback}</div>}
 
-          <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'space-around', fontSize: '1.2rem' }}>
-            <div>⏰ Kalan Süre: {timeLeft} sn</div>
-            <div>⭐ Skor: {score}</div>
-            <div>✅ {correct} | ❌ {incorrect}</div>
+          <div className={styles.statusBar}>
+            <span>⏰ Kalan Süre: {timeLeft} sn</span>
+            <span>⭐ Skor: {score}</span>
+            <span>✅ {correct} | ❌ {incorrect}</span>
           </div>
         </>
       )}

@@ -5,582 +5,301 @@
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  background: linear-gradient(135deg, #fcefe3, #f9f3ea);
-  padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
-  animation: fadeIn 2s ease-out;
+  padding: 2rem 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 1.8s ease-out forwards;
+  color: #2c3e50;
 }
 
 // === BAŞLIK ===
 .title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 2.2rem;
   text-align: center;
-  color: #333;
-  animation: slideInTitle 1s ease-out, bounceTitle 1.5s ease-in-out;
+  color: #176d6b;
+  animation: slideDown 1s ease forwards, bounce 1.5s ease-in-out infinite;
 }
 
-// === ZAMAN & SKOR ===
+// === ZAMAN VE SKOR KONTEYNERİ ===
 .timeScoreContainer {
   display: flex;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: #444;
-  animation: fadeInUp 1.5s ease-out, shake 1s ease-in-out;
+  gap: 2.5rem;
+  margin-bottom: 1.8rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #34495e;
+  animation: fadeInUp 1.3s ease forwards;
 }
 
-.timeLeft,
-.score {
-  background-color: #ffffffaa;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  animation: popIn 1s ease-out, pulse 2s infinite ease-in-out;
+.timeScoreContainer span {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 0.6rem 1.3rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  animation: popIn 1s ease forwards;
 }
 
-// === GİRİŞ ALANI (Süre, Zorluk, Başlat) ===
-.inputContainer {
+// === AYARLAR FORMU ===
+.setupForm {
+  background: #fff;
+  padding: 2rem 2.2rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  background-color: #fff8f0;
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  animation: fadeInUp 1.5s ease-out;
+  gap: 1.3rem;
+  width: 320px;
+  animation: fadeInUp 1.5s ease forwards;
 }
 
-.inputContainer label {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #444;
+.setupForm label {
+  font-weight: 600;
+  color: #2f4858;
+  font-size: 1.15rem;
 }
 
-.inputContainer input[type="number"] {
+.setupForm input[type='number'],
+.setupForm select {
   padding: 0.75rem 1rem;
-  font-size: 1.1rem;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-  width: 200px;
+  font-size: 1.15rem;
+  border-radius: 12px;
+  border: 2.5px solid #b1d0d6;
+  outline-offset: 2px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: border-color 0.3s ease;
-
-  &:focus {
-    border-color: #00796b;
-    outline: none;
-  }
-}
-
-.inputContainer select {
-  padding: 0.7rem 1rem;
-  font-size: 1.05rem;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-  color: #333;
-  width: 200px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  transition: border-color 0.3s ease;
 
   &:focus {
-    border-color: #00796b;
-    outline: none;
+    border-color: #176d6b;
+    box-shadow: 0 0 10px rgba(23, 109, 107, 0.5);
   }
 }
 
-// === GÖNDER BUTONU ===
+// === BUTONLAR ===
 .submitButton {
-  padding: 0.6rem 1.2rem;
-  font-size: 1.1rem;
-  background-color: #00796b;
+  padding: 0.75rem 1.6rem;
+  font-size: 1.2rem;
+  font-weight: 700;
   color: white;
+  background-color: #176d6b;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  animation: buttonPulse 1.5s infinite ease-in-out;
+  box-shadow: 0 6px 15px rgba(23, 109, 107, 0.5);
+  transition: background-color 0.25s ease, transform 0.2s ease;
+  animation: pulseButton 2s infinite ease-in-out;
 
   &:hover {
-    background-color: #004d40;
-    transform: scale(1.05);
+    background-color: #0f4a49;
+    transform: scale(1.08);
   }
 
   &.passButton {
-    background-color: #ff5722;
-    margin-right: 10px;
+    background-color: #d35400;
 
     &:hover {
-      background-color: #e64a19;
+      background-color: #a84300;
     }
+  }
+
+  &:disabled {
+    background-color: #ccc !important;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    animation: none;
   }
 }
 
 // === SORU ===
-.questionContainer {
-  margin-bottom: 1rem;
-  animation: fadeInUp 1.5s ease-out, swing 1s ease-in-out;
-}
-
 .question {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #00796b;
-  background-color: #e0f2f1;
-  padding: 1rem 2rem;
-  border-radius: 16px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  animation: slideInFromRight 1s ease-out, rotateIn 1s ease-out;
-  margin-bottom: 20px;
-}
-
-// === CEVAP GERİBİLDİRİMİ ===
-.correct {
-  background-color: #4caf50 !important;
-}
-
-.incorrect {
-  background-color: #f44336 !important;
-}
-
-.answerFeedback {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-top: 1rem;
-  color: #333;
-  animation: fadeIn 1s ease-out;
-}
-
-// === OYUN BİTTİ ===
-.gameOver {
-  font-size: 1.75rem;
-  text-align: center;
-  margin-top: 2rem;
-  color: #b71c1c;
-  background: linear-gradient(135deg, #ffebee, #ffcdd2);
-  padding: 2.5rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #176d6b;
+  background-color: #d0f0f2;
+  padding: 1.3rem 2.5rem;
   border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  animation: popUp 1.5s ease-out, bounceIn 1.2s ease-in-out;
-  transition: transform 0.3s ease;
-  line-height: 1.8; /* Satır aralığı */
-  letter-spacing: 0.5px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.2rem; /* İçerikler arasında boşluk */
-
-  &:hover {
-    transform: scale(1.03);
-  }
-}
-// === GERİ SAYIM ===
-.countdown {
-  font-size: 5rem;
-  font-weight: bold;
-  color: #ff9800;
+  box-shadow: 0 0 14px rgba(23, 109, 107, 0.25);
+  margin-bottom: 1.8rem;
+  animation: slideInRight 1s ease forwards, rotateIn 1s ease forwards;
   text-align: center;
-  margin: 2rem 0;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  animation: scaleFade 1s ease-in-out, countdownGlow 1.5s infinite alternate;
-  animation-delay: 1s;
 }
 
-// === ANİMASYONLAR ===
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-@keyframes slideInTitle {
-  0% { transform: translateY(-50px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes fadeInUp {
-  0% { transform: translateY(20px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes slideUp {
-  0% { transform: translateY(30px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes slideInFromRight {
-  0% { transform: translateX(100%); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes popIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes glow {
-  0% { box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
-  100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.6); }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-@keyframes buttonPulse {
-  0% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(0, 121, 107, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0); }
-}
-
-@keyframes buttonHover {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.05); }
-}
-
-@keyframes swing {
-  0% { transform: rotate(10deg); }
-  50% { transform: rotate(-10deg); }
-  100% { transform: rotate(10deg); }
-}
-
-@keyframes rotateIn {
-  0% { transform: rotate(90deg); opacity: 0; }
-  100% { transform: rotate(0); opacity: 1; }
-}
-
-@keyframes popUp {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes bounceIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-}
-
-@keyframes scaleFade {
-  0% { opacity: 0; transform: scale(0.5); }
-  30% { opacity: 1; transform: scale(1.2); }
-  60% { transform: scale(0.95); }
-  100% { opacity: 0.8; transform: scale(1); }
-}
-
-@keyframes countdownGlow {
-  0% { text-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
-  100% { text-shadow: 0 0 20px rgba(255, 165, 0, 1); }
-}
-
-@keyframes bounceTitle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-@keyframes countdownGlow {
-  0% { text-shadow: 0 0 5px rgba(255, 165, 0, 0.5); }
-  100% { text-shadow: 0 0 20px rgba(255, 165, 0, 1); }
-}// === ANA KONTEYNER ===
-.mainContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #fcefe3, #f9f3ea);
-  padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
-  animation: fadeIn 2s ease-out;
-}
-
-// === BAŞLIK ===
-.title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #333;
-  animation: slideInTitle 1s ease-out, bounceTitle 1.5s ease-in-out;
-}
-
-// === ZAMAN & SKOR ===
-.timeScoreContainer {
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: #444;
-  animation: fadeInUp 1.5s ease-out, shake 1s ease-in-out;
-}
-
-.timeLeft,
-.score {
-  background-color: #ffffffaa;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  animation: popIn 1s ease-out, pulse 2s infinite ease-in-out;
-}
-
-// === GİRİŞ ALANI (Süre, Zorluk, Başlat) ===
+// === GİRİŞ ALANI ===
 .inputContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
-  background-color: #fff8f0;
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  animation: fadeInUp 1.5s ease-out;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.8rem;
+  animation: fadeInUp 1.2s ease forwards;
 }
 
-.inputContainer label {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #444;
-}
-
-.inputContainer input[type="number"] {
-  padding: 0.75rem 1rem;
-  font-size: 1.1rem;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-  width: 200px;
+.inputContainer input[type='number'] {
+  width: 90px;
+  padding: 0.65rem 1rem;
+  font-size: 1.2rem;
+  border: 2px solid #b1d0d6;
+  border-radius: 14px;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   transition: border-color 0.3s ease;
 
   &:focus {
-    border-color: #00796b;
+    border-color: #176d6b;
     outline: none;
+    box-shadow: 0 0 8px rgba(23, 109, 107, 0.6);
   }
 }
 
-.inputContainer select {
-  padding: 0.7rem 1rem;
-  font-size: 1.05rem;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-  color: #333;
-  width: 200px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  transition: border-color 0.3s ease;
-
-  &:focus {
-    border-color: #00796b;
-    outline: none;
-  }
-}
-
-// === GÖNDER BUTONU ===
-.submitButton {
-  padding: 0.6rem 1.2rem;
-  font-size: 1.1rem;
-  background-color: #00796b;
+// === GERİ BİLDİRİM ===
+.feedback {
+  font-size: 1.7rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 18px rgba(23, 109, 107, 0.3);
   color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  animation: buttonPulse 1.5s infinite ease-in-out;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  animation: popIn 0.4s ease forwards;
+
+  &.wrong {
+    background: linear-gradient(135deg, #c0392b, #e74c3c);
+  }
+}
+
+// === PAS HAKKI BİLGİSİ ===
+.passStatus {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  text-align: center;
+  margin-bottom: 1.7rem;
+  user-select: none;
+}
+
+// === OYUN BİTTİ MESAJI ===
+.gameOver {
+  background: linear-gradient(135deg, #ffe6e6, #ffcccc);
+  color: #922b21;
+  font-size: 1.85rem;
+  font-weight: 700;
+  padding: 3rem 2.5rem;
+  border-radius: 22px;
+  box-shadow: 0 10px 28px rgba(217, 48, 37, 0.4);
+  text-align: center;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  animation: popUp 1.3s ease forwards, bounceIn 1.4s ease-in-out;
+  cursor: default;
 
   &:hover {
-    background-color: #004d40;
     transform: scale(1.05);
-  }
-
-  &.passButton {
-    background-color: #ff5722;
-    margin-right: 10px;
-
-    &:hover {
-      background-color: #e64a19;
-    }
+    transition: transform 0.3s ease;
   }
 }
 
-// === SORU ===
-.questionContainer {
-  margin-bottom: 1rem;
-  animation: fadeInUp 1.5s ease-out, swing 1s ease-in-out;
-}
-
-.question {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #00796b;
-  background-color: #e0f2f1;
-  padding: 1rem 2rem;
-  border-radius: 16px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  animation: slideInFromRight 1s ease-out, rotateIn 1s ease-out;
-  margin-bottom: 20px;
-}
-
-// === CEVAP GERİBİLDİRİMİ ===
-.correct {
-  background-color: #4caf50 !important;
-}
-
-.incorrect {
-  background-color: #f44336 !important;
-}
-
-.answerFeedback {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-top: 1rem;
-  color: #333;
-  animation: fadeIn 1s ease-out;
-}
-
-// === OYUN BİTTİ ===
-.gameOver {
+.stats {
   font-size: 1.5rem;
-  text-align: center;
-  margin-top: 2rem;
-  color: #d32f2f;
-  background-color: #ffebee;
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  animation: popUp 1.5s ease-out, bounceIn 1.2s ease-in-out;
-}
-
-// === GERİ SAYIM ===
-.countdown {
-  font-size: 5rem;
-  font-weight: bold;
-  color: #ff9800;
-  text-align: center;
-  margin: 2rem 0;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  animation: scaleFade 1s ease-in-out, countdownGlow 1.5s infinite alternate;
-  animation-delay: 1s;
+  font-weight: 600;
+  color: #7b241c;
 }
 
 // === ANİMASYONLAR ===
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes slideInTitle {
-  0% { transform: translateY(-50px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+@keyframes slideDown {
+  from {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 @keyframes fadeInUp {
-  0% { transform: translateY(20px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-@keyframes slideUp {
-  0% { transform: translateY(30px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes slideInFromRight {
-  0% { transform: translateX(100%); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
+@keyframes slideInRight {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes popIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-@keyframes glow {
-  0% { box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
-  100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.6); }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-@keyframes buttonPulse {
-  0% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(0, 121, 107, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(0, 121, 107, 0); }
-}
-
-@keyframes buttonHover {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.05); }
-}
-
-@keyframes swing {
-  0% { transform: rotate(10deg); }
-  50% { transform: rotate(-10deg); }
-  100% { transform: rotate(10deg); }
+@keyframes pulseButton {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(23, 109, 107, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(23, 109, 107, 0);
+  }
 }
 
 @keyframes rotateIn {
-  0% { transform: rotate(90deg); opacity: 0; }
-  100% { transform: rotate(0); opacity: 1; }
+  from {
+    transform: rotate(75deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
 }
 
 @keyframes popUp {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes bounceIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { transform: scale(1.2); opacity: 1; }
+  0% { transform: scale(0.85); opacity: 0; }
+  50% { transform: scale(1.15); opacity: 1; }
   100% { transform: scale(1); }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-}
-
-@keyframes scaleFade {
-  0% { opacity: 0; transform: scale(0.5); }
-  30% { opacity: 1; transform: scale(1.2); }
-  60% { transform: scale(0.95); }
-  100% { opacity: 0.8; transform: scale(1); }
-}
-
-@keyframes countdownGlow {
-  0% { text-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
-  100% { text-shadow: 0 0 20px rgba(255, 165, 0, 1); }
-}
-
-@keyframes bounceTitle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-@keyframes countdownGlow {
-  0% { text-shadow: 0 0 5px rgba(255, 165, 0, 0.5); }
-  100% { text-shadow: 0 0 20px rgba(255, 165, 0, 1); }
 }

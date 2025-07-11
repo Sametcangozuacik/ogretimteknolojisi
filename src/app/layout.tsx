@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import Header from "../components/header/header";
+import Footer from "../components/footer/footer";
 import styles from "./globals.module.scss";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -82,6 +83,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       <body className={`${styles.root} ${inter.className}`}>
         <Header />
         <main>{children}</main>
+        <Footer/>
       </body>
     </html>
   );

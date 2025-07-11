@@ -1,0 +1,66 @@
+.footer {
+  padding: 2rem 1rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footerContent {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.textSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footerText {
+  color: #444;
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+}
+
+.scrollButton {
+  background: none;
+  border: none;
+  color: #444;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    color: #d2814e;
+    transform: translateY(-4px);
+  }
+}
+
+.footerContentTwo {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footerContent {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .textSection {
+    align-items: center;
+  }
+
+  .footerContentTwo {
+    text-align: center;
+  }
+}

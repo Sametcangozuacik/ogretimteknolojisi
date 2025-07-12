@@ -2,33 +2,30 @@
 import React, { useState, useEffect } from 'react';
 import styles from './addition.module.scss';
 
-const getRandomQuestion = (level) => {
-  const range = level === 'easy' ? 100 : level === 'medium' ? 500 : 1000;
-  const a = Math.floor(Math.random() * range) + 1;
-  const b = Math.floor(Math.random() * range) + 1;
-  return { a, b, result: a + b };
+const getRandomAngle = (mode) => {
+  const angle = Math.floor(Math.random() * (mode === 'complementary' ? 89 : 179)) + 1;
+  const total = mode === 'complementary' ? 90 : 180;
+  return { angle, expected: total - angle, mode };
 };
 
-export default function Addition() {
+export default function ComplementarySupplementary() {
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [userAnswer, setUserAnswer] = useState('');
-  const [question, setQuestion] = useState(getRandomQuestion('medium'));
+  const [question, setQuestion] = useState(getRandomAngle('complementary'));
   const [userTime, setUserTime] = useState(60);
   const [isRunning, setIsRunning] = useState(false);
   const [feedback, setFeedback] = useState(null);
-  const [passCount, setPassCount] = useState(0);
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
-  const [level, setLevel] = useState('medium');
+  const [mode, setMode] = useState('complementary'); // 'complementary' or 'supplementary'
 
   const handleStart = () => {
     setScore(0);
-    setPassCount(0);
     setCorrect(0);
     setIncorrect(0);
     setTimeLeft(userTime);
-    setQuestion(getRandomQuestion(level));
+    setQuestion(getRandomAngle(mode));
     setIsRunning(true);
   };
 
@@ -36,13 +33,12 @@ export default function Addition() {
     const answer = Number(userAnswer.trim());
     if (isNaN(answer)) return;
 
-    const isCorrect = answer === question.result;
+    const isCorrect = answer === question.expected;
 
-    // ✅ Geliştirilmiş geri bildirim:
     setFeedback(
       isCorrect
         ? '✅ Doğru!'
-        : `❌ Yanlış! Doğru cevap: ${question.result}`
+        : `❌ Yanlış! Doğru cevap: ${question.expected}°`
     );
 
     setScore((s) => s + (isCorrect ? 1 : -1));
@@ -50,18 +46,10 @@ export default function Addition() {
 
     setTimeout(() => {
       setFeedback(null);
-      setQuestion(getRandomQuestion(level));
+      setQuestion(getRandomAngle(mode));
     }, 1000);
 
     setUserAnswer('');
-  };
-
-  const handlePass = () => {
-    if (passCount < 2) {
-      setPassCount((p) => p + 1);
-      setUserAnswer('');
-      setQuestion(getRandomQuestion(level));
-    }
   };
 
   useEffect(() => {
@@ -83,7 +71,7 @@ export default function Addition() {
 
   return (
     <main className={styles.mainContainer}>
-      <h1 className={styles.title}>🧠 Hızlı Toplama – Beyin ve Zaman Yarışı</h1>
+      <h1 className={styles.title}>📐 Tümler–Bütünler Açı Oyunu</h1>
 
       <div className={styles.timeScoreContainer}>
         <div className={styles.timeLeft}>Kalan Süre: {timeLeft} sn</div>
@@ -101,15 +89,14 @@ export default function Addition() {
             onChange={(e) => setUserTime(+e.target.value)}
             className={styles.input}
           />
-          <label>Zorluk:</label>
+          <label>Mod:</label>
           <select
-            value={level}
-            onChange={(e) => setLevel(e.target.value)}
+            value={mode}
+            onChange={(e) => setMode(e.target.value)}
             className={styles.input}
           >
-            <option value="easy">Kolay</option>
-            <option value="medium">Orta</option>
-            <option value="hard">Zor</option>
+            <option value="complementary">Tümler (90°)</option>
+            <option value="supplementary">Bütünler (180°)</option>
           </select>
           <button onClick={handleStart} className={styles.submitButton}>
             Başlat
@@ -118,7 +105,8 @@ export default function Addition() {
       ) : timeLeft > 0 ? (
         <>
           <div className={styles.question}>
-            {question.a} + {question.b} = ?
+            {question.mode === 'complementary' ? 'Tümler' : 'Bütünler'} açı tamamlayıcısı:  
+            <strong> {question.angle}°</strong>
           </div>
           <div className={styles.inputContainer}>
             <input
@@ -130,18 +118,10 @@ export default function Addition() {
             <button onClick={handleSubmit} className={styles.submitButton}>
               Cevapla
             </button>
-            <button
-              onClick={handlePass}
-              className={styles.submitButton}
-              disabled={passCount >= 2}
-            >
-              Pas
-            </button>
           </div>
           {feedback && (
             <div className={styles.answerFeedback}>{feedback}</div>
           )}
-          <div className={styles.passStatus}>Pas Hakkı: {2 - passCount}</div>
         </>
       ) : (
         <div className={styles.gameOver}>

@@ -126,6 +126,18 @@ export default function Header() {
               <span>Bölünebilme</span>
             </Link>
           </li>
+           <li className={styles.navItem}>
+            <Link href="/complementsandwholes" className={styles.navLink}>
+              <Image
+                src="/complementsandwholes.png"
+                alt="Rasyonel Sayılar"
+                width={75}
+                height={75}
+                className={styles.navIcon}
+              />
+              <span>Tümler Ve Bütünler</span>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

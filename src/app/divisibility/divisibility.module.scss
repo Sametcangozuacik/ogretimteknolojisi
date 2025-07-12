@@ -1,0 +1,116 @@
+// === Genel Ayarlar ===
+.container {
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(to right top, #e3f2fd, #ffffff);
+  box-shadow: 0 8px 20px rgba(33, 150, 243, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.title {
+  font-size: 1.8rem;
+  color: #1565c0;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.question {
+  font-size: 1.6rem;
+  color: #0d47a1;
+  margin-bottom: 1.2rem;
+  background: #e3f2fd;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
+}
+
+.button {
+  padding: 0.7rem 1.6rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 0.8rem;
+  margin: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.yes {
+  background-color: #43a047;
+  color: #fff;
+
+  &:hover {
+    background-color: #388e3c;
+  }
+}
+
+.no {
+  background-color: #e53935;
+  color: #fff;
+
+  &:hover {
+    background-color: #c62828;
+  }
+}
+
+.startButton {
+  @extend .button;
+  background-color: #1976d2;
+  color: white;
+
+  &:hover {
+    background-color: #1565c0;
+  }
+}
+
+.feedback {
+  font-size: 1.3rem;
+  margin-top: 1.4rem;
+  min-height: 40px;
+  color: #333;
+  font-weight: 500;
+}
+
+.status {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  color: #1e88e5;
+}
+
+// === Responsive ===
+@media (max-width: 600px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .question {
+    font-size: 1.4rem;
+  }
+
+  .button {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .feedback {
+    font-size: 1.2rem;
+  }
+
+  .status {
+    font-size: 1rem;
+  }
+}

@@ -117,7 +117,7 @@ export default function Header() {
           <li className={styles.navItem}>
             <Link href="/divisibility" className={styles.navLink}>
               <Image
-                src="/rationalnumbers.png"
+                src="/division.png"
                 alt="Rasyonel Sayılar"
                 width={75}
                 height={75}

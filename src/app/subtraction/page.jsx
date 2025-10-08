@@ -1,12 +1,23 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import styles from './addition.module.scss'; // SCSS dosyanın adı dilersen 'subtraction.module.scss' yapabilirsin
+import styles from './addition.module.scss'; // istersen addition.module.scss olarak kalabilir
 
 const getRandomQuestion = (level) => {
-  const range = level === 'easy' ? 100 : level === 'medium' ? 500 : 1000;
-  let a = Math.floor(Math.random() * range) + 1;
-  let b = Math.floor(Math.random() * range) + 1;
-  if (b > a) [a, b] = [b, a]; // Sonucun negatif olmaması için
+  let min, max;
+
+  if (level === 'easy') {
+    min = 1; max = 9; // tek basamaklı
+  } else if (level === 'medium') {
+    min = 10; max = 99; // iki basamaklı
+  } else {
+    min = 100; max = 9999; // üç ve dört basamaklı
+  }
+
+  let a = Math.floor(Math.random() * (max - min + 1)) + min;
+  let b = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  if (b > a) [a, b] = [b, a]; // negatif sonuç olmasın
+
   return { a, b, result: a - b };
 };
 
@@ -97,9 +108,9 @@ export default function Subtraction() {
           />
           <label>Zorluk:</label>
           <select value={level} onChange={(e) => setLevel(e.target.value)}>
-            <option value="easy">Kolay</option>
-            <option value="medium">Orta</option>
-            <option value="hard">Zor</option>
+            <option value="easy">Kolay (Tek Basamak)</option>
+            <option value="medium">Orta (İki Basamak)</option>
+            <option value="hard">Zor (3–4 Basamak)</option>
           </select>
           <button onClick={handleStart} className={styles.submitButton}>Başlat</button>
         </div>
